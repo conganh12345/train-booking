@@ -21,9 +21,8 @@ public class UserService {
 		
 		try {
 			// Get list user from API
-			User[] users = (User[]) restTemplate.getForObject(apiUrl + "user", User[].class);
+			User[] users = (User[]) restTemplate.getForObject(apiUrl + "api/user", User[].class);
 			
-			System.out.print(apiUrl);
 			return Arrays.asList(users);
 		}catch (ResourceAccessException e){
 			e.printStackTrace();
