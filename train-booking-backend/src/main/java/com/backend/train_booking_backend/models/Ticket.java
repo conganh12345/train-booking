@@ -19,7 +19,7 @@ public class Ticket {
 	private Integer id;
 	
 	@Column
-	private String name;
+	private String ticketname;
 	
 	@Column
 	private double price;
@@ -47,12 +47,12 @@ public class Ticket {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getTicketname() {
+		return ticketname;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setTicketname(String ticketname) {
+		this.ticketname = ticketname;
 	}
 
 	public double getPrice() {

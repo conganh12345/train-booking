@@ -42,5 +42,4 @@ public class SeatTypeValidate
 	    else if (status == 1) {
 	    }
 	}
-
 }
