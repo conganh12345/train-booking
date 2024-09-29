@@ -18,11 +18,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.backend.train_booking_backend.exception.SeatTypeValidate;
 import com.backend.train_booking_backend.models.SeatType;
 import com.backend.train_booking_backend.services.ISeatTypeService;
-import com.backend.train_booking_backend.services.impl.SeatTypeService;
 
 
 @RestController

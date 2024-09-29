@@ -64,7 +64,6 @@ public class SeatTypeService implements ISeatTypeService
 	public List<SeatType> deleteSeatType(Integer[] ids)
 	{
 		List<SeatType> seatTypeDeletes = new ArrayList<>();
-
         try {
             for (Integer id : ids) {
                 Optional<SeatType> seattypeOpt = seatTypeRepo.findById(id);
@@ -80,7 +79,5 @@ public class SeatTypeService implements ISeatTypeService
             throw new RuntimeException("Đã xảy ra lỗi khi xóa loại ghế.", e);
         }
         return seatTypeDeletes;
-	}
-	
-	
+	}	
 }
