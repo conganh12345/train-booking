@@ -14,25 +14,24 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "coach")
-public class Coach 
-{
+public class Coach {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column
 	private String coachName;
-	
+
 	@Column
-	private int  seatCount;
-	
+	private int seatCount;
+
 	@Column
 	private String description;
 
 	@ManyToOne
 	@JoinColumn(name = "train_id")
 	private Train train;
-	
+
 	@OneToMany(mappedBy = "coach")
 	private List<SeatType> details = new ArrayList<>();
 

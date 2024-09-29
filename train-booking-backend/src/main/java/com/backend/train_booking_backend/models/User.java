@@ -3,7 +3,6 @@ package com.backend.train_booking_backend.models;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -15,36 +14,34 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "user")
-public class User 
-{
+public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column
 	private String username;
-	
+
 	@Column
 	private String email;
 
 	@Column
 	private String password;
-	
+
 	@Column
 	private String phoneNumber;
-	
+
 	@Column
 	private String address;
-	
+
 	@Column
 	private LocalDateTime createdTime;
-	
+
 	@Column
 	private LocalDateTime updatedTime;
-	
+
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	private List<Booking> bookings = new ArrayList<>();
-
 
 	public Integer getId() {
 		return id;
@@ -53,7 +50,7 @@ public class User
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	public String getUsername() {
 		return username;
 	}

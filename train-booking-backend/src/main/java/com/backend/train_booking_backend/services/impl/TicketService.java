@@ -11,45 +11,41 @@ import com.backend.train_booking_backend.models.Ticket;
 import com.backend.train_booking_backend.repositories.TicketRepository;
 import com.backend.train_booking_backend.services.ITicketService;
 
-
 @Service
-public class TicketService implements ITicketService 
-{
+public class TicketService implements ITicketService {
 	@Autowired
 	private TicketRepository ticketRepo;
 
 	@Override
-	public List<Ticket> getAllTickets()
-	{
+	public List<Ticket> getAllTickets() {
 		return ticketRepo.findAll();
 	}
 
 	@Override
-	public Ticket getTicket(Integer id) 
-	{
-		return ticketRepo.findById(id).get()
-;	}
+	public Ticket getTicket(Integer id) {
+		return ticketRepo.findById(id).get();
+	}
 
 	@Override
 	public Ticket addTicket(Ticket ticket) {
-		try {        
-	        return ticketRepo.save(ticket);
-	    } catch (Exception e) {
-	        throw new RuntimeException("Đã xảy ra lỗi khi thêm vé.", e); 
-	    }
+		try {
+			return ticketRepo.save(ticket);
+		} catch (Exception e) {
+			throw new RuntimeException("Đã xảy ra lỗi khi thêm vé.", e);
+		}
 	}
 
 	@Override
 	public Ticket updateTicket(Integer id, Ticket ticket) {
 		try {
-            Optional<Ticket> oldTicketOpt = ticketRepo.findById(id);
-            if (oldTicketOpt.isPresent()) {
-            	ticket.setId(id);
-            }
-            return ticketRepo.save(ticket);
-	    } catch (Exception e) {
-	        throw new RuntimeException("Đã xảy ra lỗi khi sửa vé.", e); 
-	    }
+			Optional<Ticket> oldTicketOpt = ticketRepo.findById(id);
+			if (oldTicketOpt.isPresent()) {
+				ticket.setId(id);
+			}
+			return ticketRepo.save(ticket);
+		} catch (Exception e) {
+			throw new RuntimeException("Đã xảy ra lỗi khi sửa vé.", e);
+		}
 	}
 
 	@Override
@@ -59,25 +55,23 @@ public class TicketService implements ITicketService
 	}
 
 	@Override
-	public List<Ticket> deleteTicket(Integer[] ids) 
-	{
+	public List<Ticket> deleteTicket(Integer[] ids) {
 		List<Ticket> ticketDeletes = new ArrayList<>();
-        try {
-            for (Integer id : ids) {
-                Optional<Ticket> ticketOpt = ticketRepo.findById(id);
-                if (ticketOpt.isPresent()) {
-                	Ticket ticketname = ticketOpt.get();
-                	ticketDeletes.add(ticketname);
-                	ticketRepo.deleteById(id);
-                } else {
-                    System.out.println("Ticket with ID " + id + " not found.");
-                }
-            }
-        } catch (Exception e) {
-            throw new RuntimeException("Đã xảy ra lỗi khi xóa loại vé.", e);
-        }
-        return ticketDeletes;
+		try {
+			for (Integer id : ids) {
+				Optional<Ticket> ticketOpt = ticketRepo.findById(id);
+				if (ticketOpt.isPresent()) {
+					Ticket ticketname = ticketOpt.get();
+					ticketDeletes.add(ticketname);
+					ticketRepo.deleteById(id);
+				} else {
+					System.out.println("Ticket with ID " + id + " not found.");
+				}
+			}
+		} catch (Exception e) {
+			throw new RuntimeException("Đã xảy ra lỗi khi xóa loại vé.", e);
+		}
+		return ticketDeletes;
 	}
-	
-	
+
 }

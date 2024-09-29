@@ -2,7 +2,6 @@ package com.backend.train_booking_backend.models;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,19 +16,18 @@ public class Ticket {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column
 	private String ticketname;
-	
+
 	@Column
 	private double price;
-	
+
 	@Column
 	private int status;
-	
+
 	@OneToMany(mappedBy = "ticket")
 	private List<TicketBookingDetail> details = new ArrayList<>();
-	
 
 	public List<TicketBookingDetail> getDetails() {
 		return details;
@@ -70,7 +68,5 @@ public class Ticket {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	
-	
-	
+
 }

@@ -13,21 +13,20 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "station")
-public class Station 
-{
+public class Station {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column
 	private String stationname;
-	
+
 	@Column
 	private String address;
-	
+
 	@Column
 	private String description;
-	
+
 	@OneToMany(mappedBy = "station")
 	private List<Schedule> details = new ArrayList<>();
 

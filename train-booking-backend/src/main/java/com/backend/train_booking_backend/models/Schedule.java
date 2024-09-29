@@ -17,35 +17,32 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "schedule")
-public class Schedule 
-{
+public class Schedule {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column
 	private LocalDateTime departureDate;
-	
+
 	@Column
 	private String destinationStation;
-	
+
 	@Column
 	private int paymentMethod;
-	
+
 	@Column
 	private LocalDateTime estimateArrivalDate;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "station_id")
 	private Station station;
-	
+
 	@OneToMany(mappedBy = "schedule")
 	private List<Booking> details = new ArrayList<>();
-	
+
 	@ManyToMany
-	@JoinTable(name = "schedule_train",
-			joinColumns = @JoinColumn(name = "schedule_id"),
-			inverseJoinColumns = @JoinColumn(name = "train_id"))
+	@JoinTable(name = "schedule_train", joinColumns = @JoinColumn(name = "schedule_id"), inverseJoinColumns = @JoinColumn(name = "train_id"))
 	private List<Train> trains = new ArrayList<>();
 
 	public Integer getId() {
@@ -111,6 +108,5 @@ public class Schedule
 	public void setDetails(List<Booking> details) {
 		this.details = details;
 	}
-	
-	
+
 }

@@ -11,18 +11,17 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "seat_type")
-public class SeatType 
-{
+public class SeatType {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column
 	private String seatTypeName;
-	
+
 	@Column
-	private int  seatPosition;
-	
+	private int seatPosition;
+
 	@Column
 	private int status;
 

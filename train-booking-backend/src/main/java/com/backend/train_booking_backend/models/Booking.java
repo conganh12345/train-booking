@@ -3,10 +3,8 @@ package com.backend.train_booking_backend.models;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -24,42 +22,42 @@ public class Booking {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column
 	private String fullName;
-	
+
 	@Column
 	private LocalDateTime bookingTime;
-	
+
 	@Column
 	private int paymentMethod;
-	
+
 	@Column
 	private int status;
-	
+
 	@Column
 	private String depatureStation;
-	
+
 	@Column
 	private String destinationStation;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	@JsonIgnore
 	private User user;
-	
+
 	@OneToMany(mappedBy = "booking", fetch = FetchType.LAZY)
 	private List<TicketBookingDetail> details = new ArrayList<>();
 
 	@ManyToOne
-    @JoinColumn(name = "payment_id")
-    @JsonBackReference // Sử dụng @JsonBackReference để ngăn ngừa vòng lặp
-    private Payment payment;
-	
+	@JoinColumn(name = "payment_id")
+	@JsonBackReference // Sử dụng @JsonBackReference để ngăn ngừa vòng lặp
+	private Payment payment;
+
 	@ManyToOne
 	@JoinColumn(name = "schedule_id")
 	private Schedule schedule;
-	
+
 	public User getUser() {
 		return user;
 	}
