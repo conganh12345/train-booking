@@ -16,46 +16,42 @@ import com.backend.train_booking_backend.services.IStationService;
 import jakarta.validation.ValidationException;
 
 @Service
-public class StationService implements IStationService
-{	
+public class StationService implements IStationService {
 	@Autowired
 	private StationRepository stationRepo;
 
 	@Override
-	public List<Station> getAllStations()
-	{
-		return stationRepo.findAll()
-;	}
+	public List<Station> getAllStations() {
+		return stationRepo.findAll();
+	}
 
 	@Override
 	public Station getStation(Integer id) {
 		return stationRepo.findById(id).get();
 	}
-	
+
 	@Override
 	@Transactional
-	public Station addStation(Station station)
-	{
-		try 
-		{
-	        return stationRepo.save(station);
-	        
-	    } catch (Exception e) {
-	        throw new RuntimeException("Đã xảy ra lỗi khi thêm nhà ga.", e); 
-	    }
+	public Station addStation(Station station) {
+		try {
+			return stationRepo.save(station);
+
+		} catch (Exception e) {
+			throw new RuntimeException("Đã xảy ra lỗi khi thêm nhà ga.", e);
+		}
 	}
 
 	@Override
 	public Station updateStation(Integer id, Station station) {
 		try {
-            Optional<Station> oldStationOpt = stationRepo.findById(id);
-            if (oldStationOpt.isPresent()) {
-            	station.setId(id);
-            }
-            return stationRepo.save(station);
-	    } catch (Exception e) {
-	        throw new RuntimeException("Đã xảy ra lỗi khi sửa nhà ga.", e); 
-	    }
+			Optional<Station> oldStationOpt = stationRepo.findById(id);
+			if (oldStationOpt.isPresent()) {
+				station.setId(id);
+			}
+			return stationRepo.save(station);
+		} catch (Exception e) {
+			throw new RuntimeException("Đã xảy ra lỗi khi sửa nhà ga.", e);
+		}
 	}
 
 	@Override
@@ -67,23 +63,21 @@ public class StationService implements IStationService
 	public List<Station> deleteStation(Integer[] ids) {
 		List<Station> stationDeletes = new ArrayList<>();
 
-        try {
-            for (Integer id : ids) {
-                Optional<Station> stationOpt = stationRepo.findById(id);
-                if (stationOpt.isPresent()) {
-                    Station station = stationOpt.get();
-                    stationDeletes.add(station);
-                    stationRepo.deleteById(id);
-                } else {
-                    System.out.println("Station with ID " + id + " not found.");
-                }
-            }
-        } catch (Exception e) {
-            throw new RuntimeException("Đã xảy ra lỗi khi xóa nhà ga.", e);
-        }
-        return stationDeletes;
+		try {
+			for (Integer id : ids) {
+				Optional<Station> stationOpt = stationRepo.findById(id);
+				if (stationOpt.isPresent()) {
+					Station station = stationOpt.get();
+					stationDeletes.add(station);
+					stationRepo.deleteById(id);
+				} else {
+					System.out.println("Station with ID " + id + " not found.");
+				}
+			}
+		} catch (Exception e) {
+			throw new RuntimeException("Đã xảy ra lỗi khi xóa nhà ga.", e);
+		}
+		return stationDeletes;
 	}
 
-	
-	
 }

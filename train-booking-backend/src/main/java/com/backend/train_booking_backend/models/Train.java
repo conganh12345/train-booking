@@ -2,7 +2,6 @@ package com.backend.train_booking_backend.models;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,24 +13,23 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "train")
-public class Train 
-{
+public class Train {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column
 	private String trainname;
-	
+
 	@Column
-	private int  coachcount;
-	
+	private int coachcount;
+
 	@Column
 	private String description;
-	
+
 	@OneToMany(mappedBy = "train")
 	private List<Coach> details = new ArrayList<>();
-	
+
 	@ManyToMany(mappedBy = "trains")
 	private List<Schedule> schedules = new ArrayList<>();
 

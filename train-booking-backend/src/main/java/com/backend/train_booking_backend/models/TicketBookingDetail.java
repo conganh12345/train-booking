@@ -15,17 +15,17 @@ public class TicketBookingDetail {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column
 	private int customerType;
-	
+
 	@Column
 	private double price;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "ticket_id")
 	private Ticket ticket;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "booking_id")
 	private Booking booking;
@@ -69,6 +69,5 @@ public class TicketBookingDetail {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	
-	
+
 }

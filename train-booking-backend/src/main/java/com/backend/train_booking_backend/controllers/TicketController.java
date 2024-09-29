@@ -6,8 +6,8 @@ import java.util.Map;
 import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus; 
-import org.springframework.http.ResponseEntity; 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,81 +22,73 @@ import com.backend.train_booking_backend.exception.TicketValidate;
 import com.backend.train_booking_backend.models.Ticket;
 import com.backend.train_booking_backend.services.ITicketService;
 
-
 @RestController
 @Validated
 @RequestMapping("/api/ticket")
 public class TicketController {
 	@Autowired
-    private ITicketService ticketService;
+	private ITicketService ticketService;
 	private TicketValidate validation = new TicketValidate();
-	
+
 	// Exception to return error json
-    @ExceptionHandler(ValidationException.class)
-    public ResponseEntity<Map<String, String>> handleValidationException(ValidationException ex) 
-    {
-        Map<String, String> errorResponse = new HashMap<>();
-        errorResponse.put("error", ex.getMessage());
-        
-        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
-    }
-    
-    @GetMapping
-    public ResponseEntity<List<Ticket>> getAllTicket() 
-    {
-        List<Ticket> tickets = ticketService.getAllTickets();
-        if (tickets.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT); 
-        }
-        return new ResponseEntity<>(tickets, HttpStatus.OK);
-    }
-    
-    @GetMapping("/id/{id}")
-    public ResponseEntity<Ticket> getSeatType(@PathVariable Integer id) 
-    {
-    	Ticket ticket = ticketService.getTicket(id);
-    	if (ticket == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(ticket, HttpStatus.OK); 
-    }
+	@ExceptionHandler(ValidationException.class)
+	public ResponseEntity<Map<String, String>> handleValidationException(ValidationException ex) {
+		Map<String, String> errorResponse = new HashMap<>();
+		errorResponse.put("error", ex.getMessage());
+
+		return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+	}
+
+	@GetMapping
+	public ResponseEntity<List<Ticket>> getAllTicket() {
+		List<Ticket> tickets = ticketService.getAllTickets();
+		if (tickets.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<>(tickets, HttpStatus.OK);
+	}
+
+	@GetMapping("/id/{id}")
+	public ResponseEntity<Ticket> getSeatType(@PathVariable Integer id) {
+		Ticket ticket = ticketService.getTicket(id);
+		if (ticket == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(ticket, HttpStatus.OK);
+	}
 
 	@PostMapping
-	public ResponseEntity<Ticket> addTicket(@RequestBody Ticket ticket) 
-	{
-	    validation.validate(ticket);
-	    Ticket createdSeatType = ticketService.addTicket(ticket);
-	    	return new ResponseEntity<>(createdSeatType, HttpStatus.CREATED);
+	public ResponseEntity<Ticket> addTicket(@RequestBody Ticket ticket) {
+		validation.validate(ticket);
+		Ticket createdSeatType = ticketService.addTicket(ticket);
+		return new ResponseEntity<>(createdSeatType, HttpStatus.CREATED);
 	}
-	
+
 	@PutMapping("/{id}")
-    public ResponseEntity<Ticket> updateTicket(@RequestBody Ticket ticket, @PathVariable Integer id) 
-    {
-    	validation.validate(ticket); 
-    	Ticket updatedTicket = ticketService.updateTicket(id, ticket);
-        if (updatedTicket == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
-        }
-        return new ResponseEntity<>(updatedTicket, HttpStatus.OK); 
-    }
-	
+	public ResponseEntity<Ticket> updateTicket(@RequestBody Ticket ticket, @PathVariable Integer id) {
+		validation.validate(ticket);
+		Ticket updatedTicket = ticketService.updateTicket(id, ticket);
+		if (updatedTicket == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(updatedTicket, HttpStatus.OK);
+	}
+
 	@GetMapping("/{ticketname}")
-    public ResponseEntity<Ticket> getSeatTypeBySeatTypename(@PathVariable String ticketName) 
-    {
+	public ResponseEntity<Ticket> getSeatTypeBySeatTypename(@PathVariable String ticketName) {
 		Ticket ticket = ticketService.getTicketByTicketName(ticketName);
-        if (ticket == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(ticket, HttpStatus.OK);
-    }
-	
-	 @DeleteMapping
-	 public ResponseEntity<List<Ticket>> deleteTicket(@RequestBody Integer[] ids) 
-	 {
-	     List<Ticket> deletedTickets = ticketService.deleteTicket(ids);
-	     if (deletedTickets.isEmpty()) {
-	         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	     }
-	     return new ResponseEntity<>(deletedTickets, HttpStatus.OK);
-	 }
+		if (ticket == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(ticket, HttpStatus.OK);
+	}
+
+	@DeleteMapping
+	public ResponseEntity<List<Ticket>> deleteTicket(@RequestBody Integer[] ids) {
+		List<Ticket> deletedTickets = ticketService.deleteTicket(ids);
+		if (deletedTickets.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(deletedTickets, HttpStatus.OK);
+	}
 }

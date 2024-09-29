@@ -3,7 +3,6 @@ package com.backend.train_booking_backend.models;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,17 +19,17 @@ import jakarta.validation.constraints.Size;
 @Entity
 @Table(name = "admin")
 public class Admin {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column
 	private String adminname;
-	
+
 	@Column
 	private String email;
-	
+
 	@Column
 	private String password;
 
@@ -65,5 +64,5 @@ public class Admin {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 }

@@ -6,8 +6,8 @@ import java.util.Map;
 import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus; 
-import org.springframework.http.ResponseEntity; 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,82 +22,73 @@ import com.backend.train_booking_backend.exception.SeatTypeValidate;
 import com.backend.train_booking_backend.models.SeatType;
 import com.backend.train_booking_backend.services.ISeatTypeService;
 
-
 @RestController
 @Validated
 @RequestMapping("/api/seat-type")
-public class SeatTypeController 
-{
+public class SeatTypeController {
 	@Autowired
-    private ISeatTypeService seatTypeService;
+	private ISeatTypeService seatTypeService;
 	private SeatTypeValidate validation = new SeatTypeValidate();
-	
+
 	// Exception to return error json
-    @ExceptionHandler(ValidationException.class)
-    public ResponseEntity<Map<String, String>> handleValidationException(ValidationException ex) 
-    {
-        Map<String, String> errorResponse = new HashMap<>();
-        errorResponse.put("error", ex.getMessage());
-        
-        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
-    }
-    
-    @GetMapping
-    public ResponseEntity<List<SeatType>> getAllSeatType() 
-    {
-        List<SeatType> seatTypes = seatTypeService.getAllSeatTypes();
-        if (seatTypes.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT); 
-        }
-        return new ResponseEntity<>(seatTypes, HttpStatus.OK);
-    }
-    
-    @GetMapping("/id/{id}")
-    public ResponseEntity<SeatType> getSeatType(@PathVariable Integer id) 
-    {
-    	SeatType seatType = seatTypeService.getSeatType(id);
-        if (seatType == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(seatType, HttpStatus.OK); 
-    }
-    
-    @PostMapping
-    public ResponseEntity<SeatType> addSeatType(@RequestBody SeatType seatType) 
-    {
-        validation.validate(seatType);
-        SeatType createdSeatType = seatTypeService.addSeatType(seatType);
-        	return new ResponseEntity<>(createdSeatType, HttpStatus.CREATED);
-    }
-    
-    @PutMapping("/{id}")
-    public ResponseEntity<SeatType> updateSeatType(@RequestBody SeatType seatType, @PathVariable Integer id) 
-    {
-    	validation.validate(seatType); 
-    	SeatType updatedSeatType = seatTypeService.updateSeatType(id, seatType);
-        if (updatedSeatType == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
-        }
-        return new ResponseEntity<>(updatedSeatType, HttpStatus.OK); 
-    }
-    
-    @GetMapping("/{seattypename}")
-    public ResponseEntity<SeatType> getSeatTypeBySeatTypename(@PathVariable String seatTypeName) 
-    {
-    	SeatType seatType = seatTypeService.getSeatTypeBySeatTypename(seatTypeName);
-        if (seatType == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(seatType, HttpStatus.OK);
-    }
-    
-    @DeleteMapping
-    public ResponseEntity<List<SeatType>> deleteSeatType(@RequestBody Integer[] ids) 
-    {
-        List<SeatType> deletedSeatTypes = seatTypeService.deleteSeatType(ids);
-        if (deletedSeatTypes.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(deletedSeatTypes, HttpStatus.OK);
-    }
+	@ExceptionHandler(ValidationException.class)
+	public ResponseEntity<Map<String, String>> handleValidationException(ValidationException ex) {
+		Map<String, String> errorResponse = new HashMap<>();
+		errorResponse.put("error", ex.getMessage());
+
+		return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+	}
+
+	@GetMapping
+	public ResponseEntity<List<SeatType>> getAllSeatType() {
+		List<SeatType> seatTypes = seatTypeService.getAllSeatTypes();
+		if (seatTypes.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<>(seatTypes, HttpStatus.OK);
+	}
+
+	@GetMapping("/id/{id}")
+	public ResponseEntity<SeatType> getSeatType(@PathVariable Integer id) {
+		SeatType seatType = seatTypeService.getSeatType(id);
+		if (seatType == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(seatType, HttpStatus.OK);
+	}
+
+	@PostMapping
+	public ResponseEntity<SeatType> addSeatType(@RequestBody SeatType seatType) {
+		validation.validate(seatType);
+		SeatType createdSeatType = seatTypeService.addSeatType(seatType);
+		return new ResponseEntity<>(createdSeatType, HttpStatus.CREATED);
+	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<SeatType> updateSeatType(@RequestBody SeatType seatType, @PathVariable Integer id) {
+		validation.validate(seatType);
+		SeatType updatedSeatType = seatTypeService.updateSeatType(id, seatType);
+		if (updatedSeatType == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(updatedSeatType, HttpStatus.OK);
+	}
+
+	@GetMapping("/{seattypename}")
+	public ResponseEntity<SeatType> getSeatTypeBySeatTypename(@PathVariable String seatTypeName) {
+		SeatType seatType = seatTypeService.getSeatTypeBySeatTypename(seatTypeName);
+		if (seatType == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(seatType, HttpStatus.OK);
+	}
+
+	@DeleteMapping
+	public ResponseEntity<List<SeatType>> deleteSeatType(@RequestBody Integer[] ids) {
+		List<SeatType> deletedSeatTypes = seatTypeService.deleteSeatType(ids);
+		if (deletedSeatTypes.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(deletedSeatTypes, HttpStatus.OK);
+	}
 }
