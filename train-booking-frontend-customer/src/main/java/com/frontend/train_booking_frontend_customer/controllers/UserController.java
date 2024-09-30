@@ -25,10 +25,15 @@ public class UserController
     public String index(Model model) 
     {
     	List<User> users = userService.getAllUsers();
-
+    	model.addAttribute("page", "user");
         model.addAttribute("users", users);
         
     	return "user/index";
     } 
-   
+
+    @GetMapping("/base-layout")
+    public String showBaseLayout() {
+        return "layouts/base-layout"; 
+    }
+
 }

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>Test </title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico"/>
+    <link href="/css/layouts/modern-light-menu/light/loader.css" rel="stylesheet" type="text/css" />
+    <link href="/css/layouts/modern-light-menu/dark/loader.css" rel="stylesheet" type="text/css" />
+    
+    <link href="/css/layouts/modern-light-menu/light/structure.css" rel="stylesheet" type="text/css" />
+    <link href="/css/layouts/modern-light-menu/dark/structure.css" rel="stylesheet" type="text/css" />
+    
+    <script src="/js/layouts/modern-light-menu/loader.js"></script>
+
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    
+    <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    
+    <link href="/css/layouts/modern-light-menu/light/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="/css/layouts/modern-light-menu/dark/plugins.css" rel="stylesheet" type="text/css" />
+    
+    <link href="/css/assets/dark/main.css" rel="stylesheet" type="text/css" />
+    <link href="/css/assets/light/main.css" rel="stylesheet" type="text/css" />
+    
+    <link href="/plugins/highlight/styles/monokai-sublime.css" rel="stylesheet" type="text/css" />
+    <link href="/plugins/notification/snackbar/snackbar.min.css" rel="stylesheet" type="text/css" />
+    <link href="/plugins/waves/waves.min.css" rel="stylesheet" type="text/css" />
+    
+    <link href="/css/assets/dark/scrollspyNav.css" rel="stylesheet" type="text/css" />
+    <link href="/css/assets/light/scrollspyNav.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <link href="/plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
+    <link href="/css/assets/light/dashboard/dash_1.css" rel="stylesheet" type="text/css" />
+    <link href="/css/assets/dark/dashboard/dash_1.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+
+</head>
+<body class="layout-boxed">
+	<!-- BEGIN LOADER -->
+	<div id="load_screen">
+		<div class="loader">
+			<div class="loader-content">
+				<div class="spinner-grow align-self-center"></div>
+			</div>
+		</div>
+	</div>
+	<!--  END LOADER -->
+
+	<!--  BEGIN NAVBAR  -->
+	<div th:replace="layouts/navbar/style-vertical-menu"></div>
+	<!--  END NAVBAR  -->
+
+	<!--  BEGIN MAIN CONTAINER  -->
+	<div class="main-container" id="container">
+
+		<div class="overlay"></div>
+		<div class="search-overlay"></div>
+
+		<!--  BEGIN SIDEBAR  -->
+		 <div th:replace="layouts/menu/vertical-menu"></div>
+		<!--  END SIDEBAR  -->
+
+		<!--  BEGIN CONTENT AREA  -->
+		<div id="content" class="main-content">
+			<div layout:fragment="content" class="layout-px-spacing">
+				<div class="middle-content container-xxl p-0">
+					<div class="row layout-top-spacing">
+						<div
+							class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
+							<div class="widget widget-card-four">
+								<div class="widget-content">
+									<div class="w-header">
+										<div class="w-info">
+											<h6 class="value">Expenses</h6>
+										</div>
+										<div class="task-action">
+											<div class="dropdown">
+												<a class="dropdown-toggle" href="#" role="button"
+													id="expenses" data-bs-toggle="dropdown"
+													aria-haspopup="true" aria-expanded="false"> <svg
+														xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+														viewBox="0 0 24 24" fill="none" stroke="currentColor"
+														stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round"
+														class="feather feather-more-horizontal">
+														<circle cx="12" cy="12" r="1"></circle>
+														<circle cx="19" cy="12" r="1"></circle>
+														<circle cx="5" cy="12" r="1"></circle></svg>
+												</a>
+
+												<div class="dropdown-menu left" aria-labelledby="expenses"
+													style="will-change: transform;">
+													<a class="dropdown-item" href="javascript:void(0);">This
+														Week</a> <a class="dropdown-item" href="javascript:void(0);">Last
+														Week</a> <a class="dropdown-item" href="javascript:void(0);">Last
+														Month</a>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="w-content">
+
+										<div class="w-info">
+											<p class="value">
+												$ 45,141 <span>this week</span>
+												<svg xmlns="http://www.w3.org/2000/svg" width="24"
+													height="24" viewBox="0 0 24 24" fill="none"
+													stroke="currentColor" stroke-width="2"
+													stroke-linecap="round" stroke-linejoin="round"
+													class="feather feather-trending-up">
+													<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+													<polyline points="17 6 23 6 23 12"></polyline></svg>
+											</p>
+										</div>
+
+									</div>
+
+									<div class="w-progress-stats">
+										<div class="progress">
+											<div class="progress-bar bg-gradient-secondary"
+												role="progressbar" style="width: 57%" aria-valuenow="57"
+												aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+
+										<div class="">
+											<div class="w-icon">
+												<p>57%</p>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div
+							class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
+							<div class="widget widget-card-five">
+								<div class="widget-content">
+									<div class="account-box">
+
+										<div class="info-box">
+											<div class="icon">
+												<span> <img src="../src/assets/img/money-bag.png"
+													alt="money-bag">
+												</span>
+											</div>
+
+											<div class="balance-info">
+												<h6>Total Balance</h6>
+												<p>$41,741.42</p>
+											</div>
+										</div>
+
+										<div class="card-bottom-section">
+											<div>
+												<span class="badge badge-light-success">+ 13.6% <svg
+														xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+														viewBox="0 0 24 24" fill="none" stroke="currentColor"
+														stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round"
+														class="feather feather-trending-up">
+														<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+														<polyline points="17 6 23 6 23 12"></polyline></svg></span>
+											</div>
+											<a href="javascript:void(0);" class="">View Report</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
+							<div class="row widget-statistic">
+								<div
+									class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 layout-spacing">
+									<div class="widget widget-one_hybrid widget-followers">
+										<div class="widget-heading">
+											<div class="w-title">
+												<div class="w-icon">
+													<svg xmlns="http://www.w3.org/2000/svg" width="24"
+														height="24" viewBox="0 0 24 24" fill="none"
+														stroke="currentColor" stroke-width="2"
+														stroke-linecap="round" stroke-linejoin="round"
+														class="feather feather-users">
+														<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+														<circle cx="9" cy="7" r="4"></circle>
+														<path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+														<path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+												</div>
+												<div class="">
+													<p class="w-value">31.6K</p>
+													<h5 class="">Followers</h5>
+												</div>
+											</div>
+										</div>
+										<div class="widget-content">
+											<div class="w-chart">
+												<div id="hybrid_followers"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div
+									class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 layout-spacing">
+									<div class="widget widget-one_hybrid widget-referral">
+										<div class="widget-heading">
+											<div class="w-title">
+												<div class="w-icon">
+													<svg xmlns="http://www.w3.org/2000/svg" width="24"
+														height="24" viewBox="0 0 24 24" fill="none"
+														stroke="currentColor" stroke-width="2"
+														stroke-linecap="round" stroke-linejoin="round"
+														class="feather feather-link">
+														<path
+															d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+														<path
+															d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+												</div>
+												<div class="">
+													<p class="w-value">1,900</p>
+													<h5 class="">Referral</h5>
+												</div>
+											</div>
+										</div>
+										<div class="widget-content">
+											<div class="w-chart">
+												<div id="hybrid_followers1"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div
+									class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 layout-spacing">
+									<div class="widget widget-one_hybrid widget-engagement">
+										<div class="widget-heading">
+											<div class="w-title">
+												<div class="w-icon">
+													<svg xmlns="http://www.w3.org/2000/svg" width="24"
+														height="24" viewBox="0 0 24 24" fill="none"
+														stroke="currentColor" stroke-width="2"
+														stroke-linecap="round" stroke-linejoin="round"
+														class="feather feather-message-circle">
+														<path
+															d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+												</div>
+												<div class="">
+													<p class="w-value">18.2%</p>
+													<h5 class="">Engagement</h5>
+												</div>
+											</div>
+										</div>
+										<div class="widget-content">
+											<div class="w-chart">
+												<div id="hybrid_followers3"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+			
+			<!--  BEGIN FOOTER  -->
+			<div th:replace="layouts/layout-footer"></div>
+			<!--  END FOOTER  -->
+		</div>
+		<!--  END CONTENT AREA  -->
+
+	</div>
+	<!-- END MAIN CONTAINER -->
+
+	<!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+	<script src="/js/bootstrap/bootstrap.bundle.min.js"></script>
+	<script src="/js/assets/scrollspyNav.js"></script>
+	<script src="/plugins/global/vendors.min.js"></script>
+	<script src="/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script src="/plugins/mousetrap/mousetrap.min.js"></script>
+	<script src="/plugins/waves/waves.min.js"></script>
+	<script src="/plugins/notification/snackbar/snackbar.min.js"></script>
+	<script src="/plugins/font-icons/feather/feather.min.js"></script>
+	<script src="/js/layouts/modern-light-menu/app.js"></script>
+	<!-- END GLOBAL MANDATORY SCRIPTS -->
+
+	<!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+	<script src="/plugins/apex/apexcharts.min.js"></script>
+	<script src="/js/assets/dashboard/dash_1.js"></script>
+	<!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+
+	<script src="/js/assets/custom.js"></script>
+	<script src="/js/assets/elements/custom-search.js"></script>
+	<script src="/js/app.js"></script>
+</body>
+</html>
