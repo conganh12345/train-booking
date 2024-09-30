@@ -19,16 +19,10 @@ public class UserController {
 	@GetMapping("/index")
 	public String index(Model model) {
 		List<User> users = userService.getAllUsers();
-		model.addAttribute("page", "user");
-		model.addAttribute("users", users);
+		
+		model.addAttribute("page", "user")
+			.addAttribute("users", users);
 
 		return "user/index";
-	}
-
-	@GetMapping("/base-layout")
-	public String showBaseLayout(Model model) {
-
-		model.addAttribute("page", "dashboard");
-		return "layouts/base-layout";
 	}
 }

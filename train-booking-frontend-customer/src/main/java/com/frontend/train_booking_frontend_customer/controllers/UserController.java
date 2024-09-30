@@ -25,8 +25,9 @@ public class UserController
     public String index(Model model) 
     {
     	List<User> users = userService.getAllUsers();
-    	model.addAttribute("page", "user");
-        model.addAttribute("users", users);
+    	
+    	model.addAttribute("page", "user")
+			.addAttribute("users", users);
         
     	return "user/index";
     } 
