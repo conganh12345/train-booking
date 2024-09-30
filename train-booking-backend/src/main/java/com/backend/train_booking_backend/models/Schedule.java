@@ -29,7 +29,7 @@ public class Schedule {
 	private String destinationStation;
 
 	@Column
-	private int paymentMethod;
+	private String scheduleName;
 
 	@Column
 	private LocalDateTime estimateArrivalDate;
@@ -68,13 +68,13 @@ public class Schedule {
 	public void setDestinationStation(String destinationStation) {
 		this.destinationStation = destinationStation;
 	}
-
-	public int getPaymentMethod() {
-		return paymentMethod;
+	
+	public String getScheduleName() {
+		return scheduleName;
 	}
 
-	public void setPaymentMethod(int paymentMethod) {
-		this.paymentMethod = paymentMethod;
+	public void setScheduleName(String scheduleName) {
+		this.scheduleName = scheduleName;
 	}
 
 	public LocalDateTime getEstimateArrivalDate() {
