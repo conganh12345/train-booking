@@ -47,7 +47,7 @@ public class TrainService implements ITrainService {
 			}
 			return trainRepo.save(train);
 		} catch (Exception e) {
-			throw new RuntimeException("Đã xảy ra lỗi khi sửa người dùng.", e);
+			throw new RuntimeException("Đã xảy ra lỗi khi sửa tàu.", e);
 		}
 	}
 
