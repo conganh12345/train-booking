@@ -27,6 +27,14 @@ public class UserService {
 			e.printStackTrace();
 			return null;
 		}
-		
 	}
+	
+	public void addUser(User user) {
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            restTemplate.postForObject(apiUrl + "api/user", user, User.class);
+        } catch (ResourceAccessException e) {
+            e.printStackTrace();
+        }
+    }
 }
