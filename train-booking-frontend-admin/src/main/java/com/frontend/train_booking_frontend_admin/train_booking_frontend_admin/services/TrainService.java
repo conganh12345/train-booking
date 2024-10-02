@@ -29,12 +29,14 @@ public class TrainService {
 		}
 	}
 	
-	public void addTrain(Train train) {
+	public boolean addTrain(Train train) {
         RestTemplate restTemplate = new RestTemplate();
         try {
             restTemplate.postForObject(apiUrl + "api/train", train, Train.class);
+            return true;
         } catch (ResourceAccessException e) {
             e.printStackTrace();
+            return false;
         }
     }
 }

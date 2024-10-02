@@ -1,5 +1,6 @@
 package com.backend.train_booking_backend.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.backend.train_booking_backend.exception.TrainValidate;
 import com.backend.train_booking_backend.models.Train;
+import com.backend.train_booking_backend.models.User;
 import com.backend.train_booking_backend.services.ITrainService;
 
 @RestController
@@ -41,7 +43,7 @@ public class TrainController {
 	public ResponseEntity<List<Train>> getAllTrain() {
 		List<Train> trains = trainService.getAllTrains();
 		if (trains.isEmpty()) {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			trains = new ArrayList<Train>();
 		}
 		return new ResponseEntity<>(trains, HttpStatus.OK);
 	}

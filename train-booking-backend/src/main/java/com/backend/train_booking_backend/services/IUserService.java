@@ -1,6 +1,8 @@
 package com.backend.train_booking_backend.services;
 
 import java.util.List;
+import java.util.Optional;
+
 import com.backend.train_booking_backend.models.User;
 
 public interface IUserService {
@@ -14,5 +16,5 @@ public interface IUserService {
 
 	User getUserByUsername(String username);
 
-	List<User> deleteUser(Integer[] ids);
+	Optional<User> deleteUser(Integer id);
 }

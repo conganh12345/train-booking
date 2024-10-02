@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.models.Train;
 import com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.services.TrainService;
@@ -37,14 +38,12 @@ public class TrainController {
 	}
 	
 	@PostMapping("/create")
-    public String create(@ModelAttribute() Train train, BindingResult result, Model model) {
-		 if (result.hasErrors()) {
-		        model.addAttribute("page", "train");  
-		        return "train/create";
-		    }
-
-        trainService.addTrain(train); 
-
+    public String create(@ModelAttribute() Train train, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+		if(trainService.addTrain(train)) {
+        	redirectAttributes.addFlashAttribute("success", "Thêm mới loại tàu thành công!");
+        } else {
+        	redirectAttributes.addFlashAttribute("error", "Thêm mới loại tàu thất bại!");
+        }
         return "redirect:/train/index"; 
     }
 }
