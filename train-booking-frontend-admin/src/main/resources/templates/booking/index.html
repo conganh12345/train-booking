@@ -61,10 +61,11 @@
 								<tr th:each="booking, stat : ${bookings}">
 									<td th:text="${stat.count}"></td>
 									<td th:text="${booking.fullName}"></td>
-									<td th:text="${booking.status}"></td>
+									<td th:text="${booking.paymentMethod}"></td>
 									<td th:text="${booking.depatureStation}"></td>
 									<td th:text="${booking.destinationStation}"></td>
 									<td th:text="${booking.bookingTime}"></td>
+									<td th:text="${booking.status}"></td>
 									<td>
 									    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Sửa thông tin đặt vé">
 									         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
