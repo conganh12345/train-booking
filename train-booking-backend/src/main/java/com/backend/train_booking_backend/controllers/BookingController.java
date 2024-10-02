@@ -39,7 +39,7 @@ public class BookingController {
 
 		return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
 	}
-	
+
 	@GetMapping
 	public ResponseEntity<List<Booking>> getAllBooking() {
 		List<Booking> bookings = bookingService.getAllBookings();
@@ -48,7 +48,7 @@ public class BookingController {
 		}
 		return new ResponseEntity<>(bookings, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/id/{id}")
 	public ResponseEntity<Booking> getBooking(@PathVariable Integer id) {
 		Booking booking = bookingService.getBooking(id);
@@ -57,14 +57,14 @@ public class BookingController {
 		}
 		return new ResponseEntity<>(booking, HttpStatus.OK);
 	}
-	
+
 	@PostMapping
 	public ResponseEntity<Booking> addBooking(@RequestBody Booking booking) {
 		validation.validate(booking);
 		Booking createdBooking = bookingService.addBooking(booking);
 		return new ResponseEntity<>(createdBooking, HttpStatus.CREATED);
 	}
-	
+
 	@PutMapping("/{id}")
 	public ResponseEntity<Booking> updateBooking(@RequestBody Booking booking, @PathVariable Integer id) {
 		validation.validate(booking);
@@ -83,6 +83,7 @@ public class BookingController {
 		}
 		return new ResponseEntity<>(booking, HttpStatus.OK);
 	}
+
 	@DeleteMapping
 	public ResponseEntity<List<Booking>> deleteBooking(@RequestBody Integer[] ids) {
 		List<Booking> deletedBookings = bookingService.deleteBooking(ids);
