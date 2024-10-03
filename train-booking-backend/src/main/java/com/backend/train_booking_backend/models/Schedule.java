@@ -108,5 +108,4 @@ public class Schedule {
 	public void setDetails(List<Booking> details) {
 		this.details = details;
 	}
-
 }
