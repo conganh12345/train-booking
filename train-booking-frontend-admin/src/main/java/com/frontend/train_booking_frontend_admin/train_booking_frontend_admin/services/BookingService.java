@@ -29,12 +29,46 @@ public class BookingService {
 		}
 	}
 	
-	public void addBooking(Booking booking) {
+	public boolean addBooking(Booking booking) {
+	    RestTemplate restTemplate = new RestTemplate();
+	    try {
+	        restTemplate.postForObject(apiUrl + "api/booking", booking, Booking.class);
+	        return true;  
+	    } catch (ResourceAccessException e) {
+	        e.printStackTrace();
+	        return false; 
+	    }
+	}
+	
+	public Booking getBookingById(Integer id) { 
         RestTemplate restTemplate = new RestTemplate();
         try {
-            restTemplate.postForObject(apiUrl + "api/booking", booking, Booking.class);
+            return restTemplate.getForObject(apiUrl + "api/booking/id/" + id, Booking.class);
         } catch (ResourceAccessException e) {
             e.printStackTrace();
+            return null;
+        }
+    }
+	 
+	 public boolean updateBooking(Booking booking) { 
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            restTemplate.put(apiUrl + "api/booking/" + booking.getId(), booking);
+            return true;
+        } catch (ResourceAccessException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+	 
+	 public boolean deleteBooking(Integer id) {
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            restTemplate.delete(apiUrl + "api/booking/" + id);
+            return true; 
+        } catch (ResourceAccessException e) {
+            e.printStackTrace();
+            return false; 
         }
     }
 }

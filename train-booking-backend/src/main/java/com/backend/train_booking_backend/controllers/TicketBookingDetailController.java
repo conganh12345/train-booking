@@ -3,6 +3,8 @@ package com.backend.train_booking_backend.controllers;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -81,12 +83,13 @@ public class TicketBookingDetailController {
 		return new ResponseEntity<>(ticketbookingdetail, HttpStatus.OK);
 	}
 
-	@DeleteMapping
-	public ResponseEntity<List<TicketBookingDetail>> deleteTicketBookingDetail(@RequestBody Integer[] ids) {
-		List<TicketBookingDetail> deletedTicketBookingDetails = ticketbookingdetailService.deleteTicketBookingDetail(ids);
-		if (deletedTicketBookingDetails.isEmpty()) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<>(deletedTicketBookingDetails, HttpStatus.OK);
+	@DeleteMapping("/{id}")
+	public ResponseEntity<TicketBookingDetail> deleteTicketBookingDetail(@PathVariable Integer id) {
+	    Optional<TicketBookingDetail> deletedTicketBookingDetail = ticketbookingdetailService.deleteTicketBookingDetail(id); 
+	    if (deletedTicketBookingDetail.isPresent()) {
+	        return new ResponseEntity<>(deletedTicketBookingDetail.get(), HttpStatus.OK);
+	    } else {
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    }
 	}
 }

@@ -57,23 +57,20 @@ public class CoachService implements ICoachService {
 	}
 
 	@Override
-	public List<Coach> deleteCoach(Integer[] ids) {
-		List<Coach> coachDeletes = new ArrayList<>();
-
-		try {
-			for (Integer id : ids) {
-				Optional<Coach> coachOpt = coachRepo.findById(id);
-				if (coachOpt.isPresent()) {
-					Coach coach = coachOpt.get();
-					coachDeletes.add(coach);
-					coachRepo.deleteById(id);
-				} else {
-					System.out.println("Coach with ID " + id + " not found.");
-				}
-			}
-		} catch (Exception e) {
-			throw new RuntimeException("Đã xảy ra lỗi khi xóa tàu.", e);
-		}
-		return coachDeletes;
+	@Transactional
+	public Optional<Coach> deleteCoach(Integer id) {
+	    try {
+	        Optional<Coach> coachOpt = coachRepo.findById(id);
+	        if (coachOpt.isPresent()) {
+	        	Coach coach = coachOpt.get();
+	        	coachRepo.deleteById(id);
+	            return Optional.of(coach); 
+	        } else {
+	            System.out.println("Coach with ID " + id + " not found.");
+	            return Optional.empty();
+	        }
+	    } catch (Exception e) {
+	        throw new RuntimeException("Đã xảy ra lỗi khi xóa toa.", e);
+	    }
 	}
 }

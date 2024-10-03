@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+
 import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,12 +86,13 @@ public class ScheduleController {
 		return new ResponseEntity<>(schedules, HttpStatus.OK);
 	}
 
-	@DeleteMapping
-	public ResponseEntity<List<Schedule>> deleteSchedule(@RequestBody Integer[] ids) {
-		List<Schedule> deletedSchedules = scheduleService.deleteSchedule(ids);
-		if (deletedSchedules.isEmpty()) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<>(deletedSchedules, HttpStatus.OK);
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Schedule> deleteSchedule(@PathVariable Integer id) {
+	    Optional<Schedule> deletedSchedule = scheduleService.deleteSchedule(id); 
+	    if (deletedSchedule.isPresent()) {
+	        return new ResponseEntity<>(deletedSchedule.get(), HttpStatus.OK);
+	    } else {
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    }
 	}
 }

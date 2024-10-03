@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -82,12 +84,13 @@ public class AdminController {
 		return new ResponseEntity<>(admin, HttpStatus.OK);
 	}
 
-	@DeleteMapping
-	public ResponseEntity<List<Admin>> deleteAdmin(@RequestBody Integer[] ids) {
-		List<Admin> deletedAdmins = adminService.deleteAdmin(ids);
-		if (deletedAdmins.isEmpty()) {
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Admin> deleteAdmin(@PathVariable Integer id) {
+		Optional<Admin> deletedAdmin = adminService.deleteAdmin(id);
+		if (deletedAdmin.isPresent()) {
+			return new ResponseEntity<>(deletedAdmin.get(), HttpStatus.OK);
+		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<>(deletedAdmins, HttpStatus.OK);
 	}
 }
