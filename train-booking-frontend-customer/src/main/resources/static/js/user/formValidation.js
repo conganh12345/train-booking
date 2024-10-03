@@ -10,50 +10,49 @@ function validatePassword() {
 
 	let errorMessage = [];
 	if(password.length > 0){
-		if (!lengthRegex.test(password)){
-			errorMessage.push('Password must be at least 8 characters long');
-		}
-		if(!uppercaseRegex.test(password)){
-			errorMessage.push('at least one uppercase letter');
-		}
-		if(!lowercaseRegex.test(password)){
-			errorMessage.push('at least one lowercase letter');
-		}
-		if(!numberRegex.test(password)){
-			errorMessage.push('at least one number');
-		}
-		if(!specialCharRegex.test(password)){
-			errorMessage.push('at least on special letter');
-		}
-		
-		passwordError.textContent = errorMessage.join(', ');
-		
-		return errorMessage.length === 0;
+	    if (!lengthRegex.test(password)){
+	        errorMessage.push('Mật khẩu phải có ít nhất 8 ký tự');
+	    }
+	    if(!uppercaseRegex.test(password)){
+	        errorMessage.push('ít nhất một chữ cái viết hoa');
+	    }
+	    if(!lowercaseRegex.test(password)){
+	        errorMessage.push('ít nhất một chữ cái viết thường');
+	    }
+	    if(!numberRegex.test(password)){
+	        errorMessage.push('ít nhất một chữ số');
+	    }
+	    if(!specialCharRegex.test(password)){
+	        errorMessage.push('ít nhất một ký tự đặc biệt');
+	    }
+	    
+	    passwordError.textContent = errorMessage.join(', ');
+	    
+	    return errorMessage.length === 0;
 	}else{
-		passwordError.textContent = 'Password cannot be empty';
-		return false;
+	    passwordError.textContent = 'Mật khẩu không được để trống';
+	    return false;
 	}
-	
 }
 
 function validatePhoneNumber(){
-	const phoneNumber = document.getElementById("phone-number").value;
-	const phoneNumberError = document.getElementById("phone-number-error");
-	const phoneRegex = /^0\d{9}$/;
-	if(phoneNumber.length > 0){
-		if(!phoneRegex.test(phoneNumber)){
-			phoneNumberError.textContent = 'Phone number must be 10 digits and start with 0';
-			return false;
-		}
-		phoneNumberError.textContent = '';
-		return true;
-	}
-	else{
-		phoneNumberError.textContent = 'Phone number cannot be empty';
-		return false;
-	}
-	
+    const phoneNumber = document.getElementById("phone-number").value;
+    const phoneNumberError = document.getElementById("phone-number-error");
+    const phoneRegex = /^0\d{9}$/;
+    if(phoneNumber.length > 0){
+        if(!phoneRegex.test(phoneNumber)){
+            phoneNumberError.textContent = 'Số điện thoại phải có 10 chữ số và bắt đầu bằng số 0';
+            return false;
+        }
+        phoneNumberError.textContent = '';
+        return true;
+    }
+    else{
+        phoneNumberError.textContent = 'Số điện thoại không được để trống';
+        return false;
+    }
 }
+
 
 
 
