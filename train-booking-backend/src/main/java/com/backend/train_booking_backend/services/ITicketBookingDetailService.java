@@ -1,6 +1,8 @@
 package com.backend.train_booking_backend.services;
 
 import java.util.List;
+import java.util.Optional;
+
 import com.backend.train_booking_backend.models.TicketBookingDetail;
 
 public interface ITicketBookingDetailService {
@@ -14,5 +16,5 @@ public interface ITicketBookingDetailService {
 
 	TicketBookingDetail getTicketBookingDetailByCustomerType(String customertype);
 
-	List<TicketBookingDetail> deleteTicketBookingDetail(Integer[] ids);
+	Optional<TicketBookingDetail> deleteTicketBookingDetail(Integer id);
 }

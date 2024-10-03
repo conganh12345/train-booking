@@ -66,23 +66,19 @@ public class ScheduleService implements IScheduleService {
 
 	@Override
 	@Transactional
-	public List<Schedule> deleteSchedule(Integer[] ids) {
-		List<Schedule> scheduleDeletes = new ArrayList<>();
-
-		try {
-			for (Integer id : ids) {
-				Optional<Schedule> scheduleOpt = scheduleRepo.findById(id);
-				if (scheduleOpt.isPresent()) {
-					Schedule schedule = scheduleOpt.get();
-					scheduleDeletes.add(schedule);
-					scheduleRepo.deleteById(id);
-				} else {
-					System.out.println("Schdule with ID " + id + " not found.");
-				}
-			}
-		} catch (Exception e) {
-			throw new RuntimeException("Đã xảy ra lỗi khi xóa lịch trình.", e);
-		}
-		return scheduleDeletes;
+	public Optional<Schedule> deleteSchedule(Integer id) {
+	    try {
+	        Optional<Schedule> scheduleOpt = scheduleRepo.findById(id);
+	        if (scheduleOpt.isPresent()) {
+	        	Schedule schedule = scheduleOpt.get();
+	            scheduleRepo.deleteById(id);
+	            return Optional.of(schedule); 
+	        } else {
+	            System.out.println("Schedule with ID " + id + " not found.");
+	            return Optional.empty();
+	        }
+	    } catch (Exception e) {
+	        throw new RuntimeException("Đã xảy ra lỗi khi xóa lịch trình.", e);
+	    }
 	}
 }

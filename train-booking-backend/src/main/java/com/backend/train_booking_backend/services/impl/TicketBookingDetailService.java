@@ -57,23 +57,20 @@ public class TicketBookingDetailService implements ITicketBookingDetailService {
 	}
 
 	@Override
-	public List<TicketBookingDetail> deleteTicketBookingDetail(Integer[] ids) {
-		List<TicketBookingDetail> deletes = new ArrayList<>();
-
-		try {
-			for (Integer id : ids) {
-				Optional<TicketBookingDetail> ticketbookingdetailOpt = ticketBookingDetailRepositoryRepo.findById(id);
-				if (ticketbookingdetailOpt.isPresent()) {
-					TicketBookingDetail ticketbookingdetail = ticketbookingdetailOpt.get();
-					deletes.add(ticketbookingdetail);
-					ticketBookingDetailRepositoryRepo.deleteById(id);
-				} else {
-					System.out.println("TicketBookingDetail with ID " + id + " not found.");
-				}
-			}
-		} catch (Exception e) {
-			throw new RuntimeException("Đã xảy ra lỗi khi xóa chi tiết vé.", e);
-		}
-		return deletes;
+	@Transactional
+	public Optional<TicketBookingDetail> deleteTicketBookingDetail(Integer id) {
+	    try {
+	        Optional<TicketBookingDetail> ticketBookingDetailRepositoryOpt = ticketBookingDetailRepositoryRepo.findById(id);
+	        if (ticketBookingDetailRepositoryOpt.isPresent()) {
+	        	TicketBookingDetail user = ticketBookingDetailRepositoryOpt.get();
+	        	ticketBookingDetailRepositoryRepo.deleteById(id);
+	            return Optional.of(user); 
+	        } else {
+	            System.out.println("Ticket Booking Detail with ID " + id + " not found.");
+	            return Optional.empty();
+	        }
+	    } catch (Exception e) {
+	        throw new RuntimeException("Đã xảy ra lỗi khi xóa chi tiết vé.", e);
+	    }
 	}
 }

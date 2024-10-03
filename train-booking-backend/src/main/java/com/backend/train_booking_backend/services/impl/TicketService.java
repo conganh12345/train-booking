@@ -55,23 +55,20 @@ public class TicketService implements ITicketService {
 	}
 
 	@Override
-	public List<Ticket> deleteTicket(Integer[] ids) {
-		List<Ticket> ticketDeletes = new ArrayList<>();
-		try {
-			for (Integer id : ids) {
-				Optional<Ticket> ticketOpt = ticketRepo.findById(id);
-				if (ticketOpt.isPresent()) {
-					Ticket ticketname = ticketOpt.get();
-					ticketDeletes.add(ticketname);
-					ticketRepo.deleteById(id);
-				} else {
-					System.out.println("Ticket with ID " + id + " not found.");
-				}
-			}
-		} catch (Exception e) {
-			throw new RuntimeException("Đã xảy ra lỗi khi xóa loại vé.", e);
-		}
-		return ticketDeletes;
+	@Transactional
+	public Optional<Ticket> deleteTicket(Integer id) {
+	    try {
+	        Optional<Ticket> ticketOpt = ticketRepo.findById(id);
+	        if (ticketOpt.isPresent()) {
+	        	Ticket ticketname = ticketOpt.get();
+	        	ticketRepo.deleteById(id);
+	            return Optional.of(ticketname); 
+	        } else {
+	            System.out.println("Ticket with ID " + id + " not found.");
+	            return Optional.empty();
+	        }
+	    } catch (Exception e) {
+	        throw new RuntimeException("Đã xảy ra lỗi khi xóa vé.", e);
+	    }
 	}
-
 }

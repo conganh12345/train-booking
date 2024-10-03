@@ -1,6 +1,8 @@
 package com.backend.train_booking_backend.services;
 
 import java.util.List;
+import java.util.Optional;
+
 import com.backend.train_booking_backend.models.Payment;
 
 public interface IPaymentService {
@@ -14,5 +16,5 @@ public interface IPaymentService {
 
 	Payment getPaymentByPaymentMethod(String paymentMethod);
 
-	List<Payment> deletePayment(Integer[] ids);
+	Optional<Payment> deletePayment(Integer id);
 }

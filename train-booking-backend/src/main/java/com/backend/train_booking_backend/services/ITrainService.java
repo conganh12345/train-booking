@@ -1,6 +1,8 @@
 package com.backend.train_booking_backend.services;
 
 import java.util.List;
+import java.util.Optional;
+
 import com.backend.train_booking_backend.models.Train;
 
 public interface ITrainService {
@@ -14,5 +16,5 @@ public interface ITrainService {
 
 	Train getTrainByTrainname(String trainname);
 
-	List<Train> deleteTrain(Integer[] ids);
+	Optional<Train> deleteTrain(Integer id);
 }

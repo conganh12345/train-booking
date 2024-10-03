@@ -32,7 +32,7 @@ public class AdminService implements IAdminService {
 		try {
 			return adminRepo.save(admin);
 		} catch (Exception e) {
-			throw new RuntimeException("Đã xảy ra lỗi khi thêm người dùng.", e);
+			throw new RuntimeException("Đã xảy ra lỗi khi thêm admin.", e);
 		}
 	}
 
@@ -46,7 +46,7 @@ public class AdminService implements IAdminService {
 			}
 			return adminRepo.save(admin);
 		} catch (Exception e) {
-			throw new RuntimeException("Đã xảy ra lỗi khi sửa người dùng.", e);
+			throw new RuntimeException("Đã xảy ra lỗi khi sửa admin.", e);
 		}
 	}
 
@@ -57,23 +57,19 @@ public class AdminService implements IAdminService {
 
 	@Override
 	@Transactional
-	public List<Admin> deleteAdmin(Integer[] ids) {
-		List<Admin> adminDeletes = new ArrayList<>();
-
-		try {
-			for (Integer id : ids) {
-				Optional<Admin> adminOpt = adminRepo.findById(id);
-				if (adminOpt.isPresent()) {
-					Admin admin = adminOpt.get();
-					adminDeletes.add(admin);
-					adminRepo.deleteById(id);
-				} else {
-					System.out.println("Admin with ID " + id + " not found.");
-				}
-			}
-		} catch (Exception e) {
-			throw new RuntimeException("Đã xảy ra lỗi khi xóa admin.", e);
-		}
-		return adminDeletes;
+	public Optional<Admin> deleteAdmin(Integer id) {
+	    try {
+	        Optional<Admin> adminOpt = adminRepo.findById(id);
+	        if (adminOpt.isPresent()) {
+	        	Admin admin = adminOpt.get();
+	        	adminRepo.deleteById(id);
+	            return Optional.of(admin); 
+	        } else {
+	            System.out.println("Admin with ID " + id + " not found.");
+	            return Optional.empty();
+	        }
+	    } catch (Exception e) {
+	        throw new RuntimeException("Đã xảy ra lỗi khi xóa admin.", e);
+	    }
 	}
 }

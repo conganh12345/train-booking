@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,12 +85,13 @@ public class BookingController {
 		return new ResponseEntity<>(booking, HttpStatus.OK);
 	}
 
-	@DeleteMapping
-	public ResponseEntity<List<Booking>> deleteBooking(@RequestBody Integer[] ids) {
-		List<Booking> deletedBookings = bookingService.deleteBooking(ids);
-		if (deletedBookings.isEmpty()) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<>(deletedBookings, HttpStatus.OK);
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Booking> deleteBooking(@PathVariable Integer id) {
+	    Optional<Booking> deletedBooking = bookingService.deleteBooking(id); 
+	    if (deletedBooking.isPresent()) {
+	        return new ResponseEntity<>(deletedBooking.get(), HttpStatus.OK);
+	    } else {
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    }
 	}
 }
