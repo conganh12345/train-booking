@@ -2,6 +2,10 @@ package com.frontend.train_booking_frontend_customer.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.io.Console;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 import com.frontend.train_booking_frontend_customer.models.User;
 import com.frontend.train_booking_frontend_customer.services.IUserService;
 
@@ -28,7 +34,7 @@ public class UserController
     	model.addAttribute("page", "user");
 		model.addAttribute("users", users);
         
-    	return "user/login2";
+    	return "user/signIn";
     } 
 
     @GetMapping("/base-layout")
@@ -38,7 +44,7 @@ public class UserController
     
     @GetMapping("/login")
     public String login() {
-    	return "user/login2";
+    	return "user/signIn";
     }
 
     @PostMapping("/check-login")
@@ -47,7 +53,32 @@ public class UserController
         if (user != null) {
             return ResponseEntity.ok("Login successful!"); // Send success response
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password."); // Send error response
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid email or password."); // Send error response
         }
     }
+    
+    @PostMapping("/check-email-exist")
+    public ResponseEntity<String> checkEmailExist(@RequestParam String email) {
+        User user = userService.getUserByEmail(email);
+        if (user != null) {
+            return ResponseEntity.ok("Email exists"); // Email exists
+        } else {
+            return null;
+        }
+    }
+
+    
+    @GetMapping("/signup")
+    public String signup() {
+    	return "user/signup";
+    }
+    
+    @PostMapping("/register")
+    public String register(@ModelAttribute User user) {
+    	System.out.println("Sign up");
+    	userService.signUp(user);
+    	return "user/signIn";
+    }
+    
+    
 }

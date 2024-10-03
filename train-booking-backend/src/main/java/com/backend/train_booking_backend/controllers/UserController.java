@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.backend.train_booking_backend.exception.UserValidate;
 import com.backend.train_booking_backend.models.User;
+import com.backend.train_booking_backend.repositories.UserRepository;
 import com.backend.train_booking_backend.services.IUserService;
 
 @RestController
@@ -61,14 +62,14 @@ public class UserController {
 
 	@PostMapping
 	public ResponseEntity<User> addUser(@RequestBody User user) {
-		validation.validate(user);
+//		validation.validate(user);
 		User createdUser = userService.addUser(user);
 		return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable Integer id) {
-		validation.validate(user);
+//		validation.validate(user);
 		User updatedUser = userService.updateUser(id, user);
 		if (updatedUser == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -92,6 +93,15 @@ public class UserController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(deletedUsers, HttpStatus.OK);
+	}
+	
+	@GetMapping("/findByEmail/{email}")
+	public ResponseEntity<User> findUserByEmail(@PathVariable String email){
+		User user = userService.findUserByEmail(email);
+		if(user == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 	
 	@GetMapping("/findByEmailAndPassword/{email}/{password}")

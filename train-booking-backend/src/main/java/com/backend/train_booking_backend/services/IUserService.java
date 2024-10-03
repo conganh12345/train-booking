@@ -16,5 +16,7 @@ public interface IUserService {
 
 	List<User> deleteUser(Integer[] ids);
 	
+	User findUserByEmail(String email);
+	
 	User findUserByEmailAndPassword(String email, String password);
 }

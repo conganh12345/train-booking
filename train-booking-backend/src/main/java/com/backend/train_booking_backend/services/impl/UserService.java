@@ -81,6 +81,17 @@ public class UserService implements IUserService {
 		}
 		return userDeletes;
 	}
+	
+	@Override
+	public User findUserByEmail(String email) {
+	    List<User> users = userRepo.findByEmail(email);
+
+	    if (users != null && !users.isEmpty()) {
+	        return users.get(0);
+	    }
+	    
+	    return null; 
+	}
 
 	@Override
 	public User findUserByEmailAndPassword(String email, String password) {
@@ -90,4 +101,6 @@ public class UserService implements IUserService {
 		}
 		return null;
 	}
+
+	
 }
