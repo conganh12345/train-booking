@@ -77,4 +77,26 @@ public class UserService implements IUserService {
 	        throw new RuntimeException("Đã xảy ra lỗi khi xóa người dùng.", e);
 	    }
 	}
+	
+	@Override
+	public User findUserByEmail(String email) {
+	    List<User> users = userRepo.findByEmail(email);
+
+	    if (users != null && !users.isEmpty()) {
+	        return users.get(0);
+	    }
+	    
+	    return null; 
+	}
+
+	@Override
+	public User findUserByEmailAndPassword(String email, String password) {
+		User user = userRepo.findByEmailAndPassword(email, password);
+		if(user != null) {
+			return user;
+		}
+		return null;
+	}
+
+	
 }
