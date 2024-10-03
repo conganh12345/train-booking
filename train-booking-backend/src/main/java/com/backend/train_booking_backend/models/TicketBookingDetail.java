@@ -17,7 +17,7 @@ public class TicketBookingDetail {
 	private Integer id;
 
 	@Column
-	private int customerType;
+	private String customerType;
 
 	@Column
 	private double price;
@@ -54,11 +54,11 @@ public class TicketBookingDetail {
 		this.id = id;
 	}
 
-	public int getCustomerType() {
+	public String getCustomerType() {
 		return customerType;
 	}
 
-	public void setCustomerType(int customerType) {
+	public void setCustomerType(String customerType) {
 		this.customerType = customerType;
 	}
 

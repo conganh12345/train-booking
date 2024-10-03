@@ -27,6 +27,48 @@ public class UserService {
 			e.printStackTrace();
 			return null;
 		}
-		
 	}
+	
+	public boolean addUser(User user) {
+	    RestTemplate restTemplate = new RestTemplate();
+	    try {
+	        restTemplate.postForObject(apiUrl + "api/user", user, User.class);
+	        return true;  
+	    } catch (ResourceAccessException e) {
+	        e.printStackTrace();
+	        return false; 
+	    }
+	}
+	
+	 public User getUserById(Integer id) { 
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            return restTemplate.getForObject(apiUrl + "api/user/id/" + id, User.class);
+        } catch (ResourceAccessException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+	 
+	 public boolean updateUser(User user) { 
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            restTemplate.put(apiUrl + "api/user/" + user.getId(), user);
+            return true;
+        } catch (ResourceAccessException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+	 
+	 public boolean deleteUser(Integer id) {
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            restTemplate.delete(apiUrl + "api/user/" + id);
+            return true; 
+        } catch (ResourceAccessException e) {
+            e.printStackTrace();
+            return false; 
+        }
+    }
 }

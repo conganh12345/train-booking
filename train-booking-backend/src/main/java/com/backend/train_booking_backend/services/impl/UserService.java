@@ -62,24 +62,20 @@ public class UserService implements IUserService {
 
 	@Override
 	@Transactional
-	public List<User> deleteUser(Integer[] ids) {
-		List<User> userDeletes = new ArrayList<>();
-
-		try {
-			for (Integer id : ids) {
-				Optional<User> userOpt = userRepo.findById(id);
-				if (userOpt.isPresent()) {
-					User user = userOpt.get();
-					userDeletes.add(user);
-					userRepo.deleteById(id);
-				} else {
-					System.out.println("User with ID " + id + " not found.");
-				}
-			}
-		} catch (Exception e) {
-			throw new RuntimeException("Đã xảy ra lỗi khi xóa người dùng.", e);
-		}
-		return userDeletes;
+	public Optional<User> deleteUser(Integer id) {
+	    try {
+	        Optional<User> userOpt = userRepo.findById(id);
+	        if (userOpt.isPresent()) {
+	            User user = userOpt.get();
+	            userRepo.deleteById(id);
+	            return Optional.of(user); 
+	        } else {
+	            System.out.println("User with ID " + id + " not found.");
+	            return Optional.empty();
+	        }
+	    } catch (Exception e) {
+	        throw new RuntimeException("Đã xảy ra lỗi khi xóa người dùng.", e);
+	    }
 	}
 
 	@Override
