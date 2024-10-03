@@ -56,22 +56,20 @@ public class SeatTypeService implements ISeatTypeService {
 	}
 
 	@Override
-	public List<SeatType> deleteSeatType(Integer[] ids) {
-		List<SeatType> seatTypeDeletes = new ArrayList<>();
-		try {
-			for (Integer id : ids) {
-				Optional<SeatType> seattypeOpt = seatTypeRepo.findById(id);
-				if (seattypeOpt.isPresent()) {
-					SeatType seattype = seattypeOpt.get();
-					seatTypeDeletes.add(seattype);
-					seatTypeRepo.deleteById(id);
-				} else {
-					System.out.println("SeatType with ID " + id + " not found.");
-				}
-			}
-		} catch (Exception e) {
-			throw new RuntimeException("Đã xảy ra lỗi khi xóa loại ghế.", e);
-		}
-		return seatTypeDeletes;
+	@Transactional
+	public Optional<SeatType> deleteSeatType(Integer id) {
+	    try {
+	        Optional<SeatType> seatTypeOpt = seatTypeRepo.findById(id);
+	        if (seatTypeOpt.isPresent()) {
+	        	SeatType seatType = seatTypeOpt.get();
+	        	seatTypeRepo.deleteById(id);
+	            return Optional.of(seatType); 
+	        } else {
+	            System.out.println("SeatType with ID " + id + " not found.");
+	            return Optional.empty();
+	        }
+	    } catch (Exception e) {
+	        throw new RuntimeException("Đã xảy ra lỗi khi xóa loại ghế.", e);
+	    }
 	}
 }

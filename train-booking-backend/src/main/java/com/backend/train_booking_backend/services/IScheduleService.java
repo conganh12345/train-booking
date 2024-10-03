@@ -1,6 +1,8 @@
 package com.backend.train_booking_backend.services;
 
 import java.util.List;
+import java.util.Optional;
+
 import com.backend.train_booking_backend.models.Schedule;
 
 public interface IScheduleService {
@@ -14,5 +16,5 @@ public interface IScheduleService {
 
 	Schedule getScheduleByScheduleName(String schedulename);
 
-	List<Schedule> deleteSchedule(Integer[] ids);
+	Optional<Schedule> deleteSchedule(Integer id);
 }

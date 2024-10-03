@@ -58,23 +58,20 @@ public class PaymentService implements IPaymentService {
 	}
 
 	@Override
-	public List<Payment> deletePayment(Integer[] ids) {
-		List<Payment> paymentDeletes = new ArrayList<>();
-
-		try {
-			for (Integer id : ids) {
-				Optional<Payment> paymentOpt = paymentRepo.findById(id);
-				if (paymentOpt.isPresent()) {
-					Payment payment = paymentOpt.get();
-					paymentDeletes.add(payment);
-					paymentRepo.deleteById(id);
-				} else {
-					System.out.println("Payment with ID " + id + " not found.");
-				}
-			}
-		} catch (Exception e) {
-			throw new RuntimeException("Đã xảy ra lỗi khi xóa thanh toán.", e);
-		}
-		return paymentDeletes;
+	@Transactional
+	public Optional<Payment> deletePayment(Integer id) {
+	    try {
+	        Optional<Payment> paymentOpt = paymentRepo.findById(id);
+	        if (paymentOpt.isPresent()) {
+	        	Payment payment = paymentOpt.get();
+	        	paymentRepo.deleteById(id);
+	            return Optional.of(payment); 
+	        } else {
+	            System.out.println("Payment with ID " + id + " not found.");
+	            return Optional.empty();
+	        }
+	    } catch (Exception e) {
+	        throw new RuntimeException("Đã xảy ra lỗi khi xóa thanh toán.", e);
+	    }
 	}
 }

@@ -61,24 +61,19 @@ public class BookingService implements IBookingService {
 
 	@Override
 	@Transactional
-	public List<Booking> deleteBooking(Integer[] ids) {
-		List<Booking> bookingDeletes = new ArrayList<>();
-
+	public Optional<Booking> deleteBooking(Integer id) {
 		try {
-			for (Integer id : ids) {
-				Optional<Booking> bookingOpt = bookingRepo.findById(id);
-				if (bookingOpt.isPresent()) {
-					Booking booking = bookingOpt.get();
-					bookingDeletes.add(booking);
-					bookingRepo.deleteById(id);
-				} else {
-					System.out.println("Booking with ID " + id + " not found.");
-				}
-			}
-		} catch (Exception e) {
-			throw new RuntimeException("Đã xảy ra lỗi khi xóa đặt vé.", e);
-		}
-		return bookingDeletes;
+	        Optional<Booking> bookingOpt = bookingRepo.findById(id);
+	        if (bookingOpt.isPresent()) {
+	        	Booking booking = bookingOpt.get();
+	        	bookingRepo.deleteById(id);
+	            return Optional.of(booking); 
+	        } else {
+	            System.out.println("Booking with ID " + id + " not found.");
+	            return Optional.empty();
+	        }
+	    } catch (Exception e) {
+	        throw new RuntimeException("Đã xảy ra lỗi khi xóa đặt vé.", e);
+	    }
 	}
-
 }

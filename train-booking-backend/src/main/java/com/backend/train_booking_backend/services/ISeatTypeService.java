@@ -1,6 +1,8 @@
 package com.backend.train_booking_backend.services;
 
 import java.util.List;
+import java.util.Optional;
+
 import com.backend.train_booking_backend.models.SeatType;
 
 public interface ISeatTypeService {
@@ -14,5 +16,5 @@ public interface ISeatTypeService {
 
 	SeatType getSeatTypeBySeatTypename(String seattypename);
 
-	List<SeatType> deleteSeatType(Integer[] ids);
+	Optional<SeatType> deleteSeatType(Integer id);
 }

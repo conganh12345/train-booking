@@ -1,6 +1,8 @@
 package com.backend.train_booking_backend.services;
 
 import java.util.List;
+import java.util.Optional;
+
 import com.backend.train_booking_backend.models.Coach;
 
 public interface ICoachService {
@@ -14,5 +16,5 @@ public interface ICoachService {
 
 	Coach getCoachByCoachName(String coachname);
 
-	List<Coach> deleteCoach(Integer[] ids);
+	Optional<Coach> deleteCoach(Integer id);
 }

@@ -57,24 +57,20 @@ public class TrainService implements ITrainService {
 	}
 
 	@Override
-	public List<Train> deleteTrain(Integer[] ids) {
-		List<Train> trainDeletes = new ArrayList<>();
-
-		try {
-			for (Integer id : ids) {
-				Optional<Train> trainOpt = trainRepo.findById(id);
-				if (trainOpt.isPresent()) {
-					Train trainname = trainOpt.get();
-					trainDeletes.add(trainname);
-					trainRepo.deleteById(id);
-				} else {
-					System.out.println("Train with ID " + id + " not found.");
-				}
-			}
-		} catch (Exception e) {
-			throw new RuntimeException("Đã xảy ra lỗi khi xóa tàu.", e);
-		}
-		return trainDeletes;
+	@Transactional
+	public Optional<Train> deleteTrain(Integer id) {
+	    try {
+	        Optional<Train> trainOpt = trainRepo.findById(id);
+	        if (trainOpt.isPresent()) {
+	        	Train train = trainOpt.get();
+	        	trainRepo.deleteById(id);
+	            return Optional.of(train); 
+	        } else {
+	            System.out.println("Train with ID " + id + " not found.");
+	            return Optional.empty();
+	        }
+	    } catch (Exception e) {
+	        throw new RuntimeException("Đã xảy ra lỗi khi xóa tàu.", e);
+	    }
 	}
-
 }

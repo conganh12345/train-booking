@@ -1,6 +1,8 @@
 package com.backend.train_booking_backend.services;
 
 import java.util.List;
+import java.util.Optional;
+
 import com.backend.train_booking_backend.models.Admin;
 
 public interface IAdminService {
@@ -15,6 +17,6 @@ public interface IAdminService {
 
 	Admin getAdminByAdminname(String adminname);
 
-	List<Admin> deleteAdmin(Integer[] ids);
+	Optional<Admin> deleteAdmin(Integer id);
 
 }

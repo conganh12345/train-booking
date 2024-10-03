@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.backend.train_booking_backend.exception.StationValidate;
 import com.backend.train_booking_backend.models.Station;
-import com.backend.train_booking_backend.models.User;
 import com.backend.train_booking_backend.repositories.StationRepository;
 import com.backend.train_booking_backend.services.IStationService;
 
@@ -60,24 +59,20 @@ public class StationService implements IStationService {
 	}
 
 	@Override
-	public List<Station> deleteStation(Integer[] ids) {
-		List<Station> stationDeletes = new ArrayList<>();
-
-		try {
-			for (Integer id : ids) {
-				Optional<Station> stationOpt = stationRepo.findById(id);
-				if (stationOpt.isPresent()) {
-					Station station = stationOpt.get();
-					stationDeletes.add(station);
-					stationRepo.deleteById(id);
-				} else {
-					System.out.println("Station with ID " + id + " not found.");
-				}
-			}
-		} catch (Exception e) {
-			throw new RuntimeException("Đã xảy ra lỗi khi xóa nhà ga.", e);
-		}
-		return stationDeletes;
+	@Transactional
+	public Optional<Station> deleteStation(Integer id) {
+	    try {
+	        Optional<Station> stationOpt = stationRepo.findById(id);
+	        if (stationOpt.isPresent()) {
+	        	Station station = stationOpt.get();
+	        	stationRepo.deleteById(id);
+	            return Optional.of(station); 
+	        } else {
+	            System.out.println("Station with ID " + id + " not found.");
+	            return Optional.empty();
+	        }
+	    } catch (Exception e) {
+	        throw new RuntimeException("Đã xảy ra lỗi khi xóa nhà ga.", e);
+	    }
 	}
-
 }

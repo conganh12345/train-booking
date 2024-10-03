@@ -1,8 +1,11 @@
 package com.backend.train_booking_backend.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,7 +44,7 @@ public class TrainController {
 	public ResponseEntity<List<Train>> getAllTrain() {
 		List<Train> trains = trainService.getAllTrains();
 		if (trains.isEmpty()) {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			trains = new ArrayList<Train>();
 		}
 		return new ResponseEntity<>(trains, HttpStatus.OK);
 	}
@@ -81,12 +84,13 @@ public class TrainController {
 		return new ResponseEntity<>(train, HttpStatus.OK);
 	}
 
-	@DeleteMapping
-	public ResponseEntity<List<Train>> deleteTrain(@RequestBody Integer[] ids) {
-		List<Train> deletedTrains = trainService.deleteTrain(ids);
-		if (deletedTrains.isEmpty()) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<>(deletedTrains, HttpStatus.OK);
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Train> deleteTrain(@PathVariable Integer id) {
+	    Optional<Train> deletedTrain = trainService.deleteTrain(id); 
+	    if (deletedTrain.isPresent()) {
+	        return new ResponseEntity<>(deletedTrain.get(), HttpStatus.OK);
+	    } else {
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    }
 	}
 }

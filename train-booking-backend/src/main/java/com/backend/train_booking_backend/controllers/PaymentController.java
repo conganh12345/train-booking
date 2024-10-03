@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+
 import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,13 +86,13 @@ public class PaymentController {
 		return new ResponseEntity<>(payment, HttpStatus.OK);
 	}
 
-	@DeleteMapping
-	public ResponseEntity<List<Payment>> deletePayment(@RequestBody Integer[] ids) {
-		List<Payment> deletedPayments = paymentService.deletePayment(ids);
-		if (deletedPayments.isEmpty()) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<>(deletedPayments, HttpStatus.OK);
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Payment> deletePayment(@PathVariable Integer id) {
+	    Optional<Payment> deletedPayment = paymentService.deletePayment(id); 
+	    if (deletedPayment.isPresent()) {
+	        return new ResponseEntity<>(deletedPayment.get(), HttpStatus.OK);
+	    } else {
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    }
 	}
-
 }
