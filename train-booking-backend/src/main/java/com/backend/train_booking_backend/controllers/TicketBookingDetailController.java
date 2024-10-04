@@ -1,5 +1,6 @@
 package com.backend.train_booking_backend.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +44,7 @@ public class TicketBookingDetailController {
 	public ResponseEntity<List<TicketBookingDetail>> getAllTicketBookingDetail() {
 		List<TicketBookingDetail> ticketbookingdetail = ticketbookingdetailService.getAllTicketBookingDetails();
 		if (ticketbookingdetail.isEmpty()) {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			ticketbookingdetail = new ArrayList<TicketBookingDetail>();
 		}
 		return new ResponseEntity<>(ticketbookingdetail, HttpStatus.OK);
 	}
@@ -58,16 +59,20 @@ public class TicketBookingDetailController {
 	}
 
 	@PostMapping
-	public ResponseEntity<TicketBookingDetail> addTicketBookingDetail(@RequestBody TicketBookingDetail ticketbookingdetail) {
+	public ResponseEntity<TicketBookingDetail> addTicketBookingDetail(
+			@RequestBody TicketBookingDetail ticketbookingdetail) {
 		validation.validate(ticketbookingdetail);
-		TicketBookingDetail createdTicketBookingDetail = ticketbookingdetailService.addTicketBookingDetail(ticketbookingdetail);
+		TicketBookingDetail createdTicketBookingDetail = ticketbookingdetailService
+				.addTicketBookingDetail(ticketbookingdetail);
 		return new ResponseEntity<>(createdTicketBookingDetail, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<TicketBookingDetail> updateTicketBookingDetail(@RequestBody TicketBookingDetail ticketbookingdetail, @PathVariable Integer id) {
+	public ResponseEntity<TicketBookingDetail> updateTicketBookingDetail(
+			@RequestBody TicketBookingDetail ticketbookingdetail, @PathVariable Integer id) {
 		validation.validate(ticketbookingdetail);
-		TicketBookingDetail updatedTicketBookingDetail = ticketbookingdetailService.updateTicketBookingDetail(id, ticketbookingdetail);
+		TicketBookingDetail updatedTicketBookingDetail = ticketbookingdetailService.updateTicketBookingDetail(id,
+				ticketbookingdetail);
 		if (updatedTicketBookingDetail == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -76,7 +81,8 @@ public class TicketBookingDetailController {
 
 	@GetMapping("/{customertype}")
 	public ResponseEntity<TicketBookingDetail> getTicketBookingDetail(@PathVariable String customertype) {
-		TicketBookingDetail ticketbookingdetail = ticketbookingdetailService.getTicketBookingDetailByCustomerType(customertype);
+		TicketBookingDetail ticketbookingdetail = ticketbookingdetailService
+				.getTicketBookingDetailByCustomerType(customertype);
 		if (ticketbookingdetail == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -85,11 +91,12 @@ public class TicketBookingDetailController {
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<TicketBookingDetail> deleteTicketBookingDetail(@PathVariable Integer id) {
-	    Optional<TicketBookingDetail> deletedTicketBookingDetail = ticketbookingdetailService.deleteTicketBookingDetail(id); 
-	    if (deletedTicketBookingDetail.isPresent()) {
-	        return new ResponseEntity<>(deletedTicketBookingDetail.get(), HttpStatus.OK);
-	    } else {
-	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	    }
+		Optional<TicketBookingDetail> deletedTicketBookingDetail = ticketbookingdetailService
+				.deleteTicketBookingDetail(id);
+		if (deletedTicketBookingDetail.isPresent()) {
+			return new ResponseEntity<>(deletedTicketBookingDetail.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 }

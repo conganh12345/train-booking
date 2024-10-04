@@ -12,88 +12,77 @@
 			<nav class="breadcrumb-style-one" aria-label="breadcrumb">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="#">Người dùng</a></li>
-					<li class="breadcrumb-item" aria-current="page"><a th:href="@{/train/index}">Quản lý người dùng</a></li>
-					<li class="breadcrumb-item active" aria-current="page">Thêm mới người dùng</li>
+					<li class="breadcrumb-item" aria-current="page"><a
+						th:href="@{/train/index}">Quản lý người dùng</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Thêm
+						mới người dùng</li>
 				</ol>
 			</nav>
 		</div>
 		<!-- /BREADCRUMB -->
-		
+
 		<div class="layout-top-spacing col-12">
-		<a th:href="@{/train/index}" class="btn">
-		    Trở lại
-		</a>
-				
+			<a th:href="@{/train/index}" class="btn"> Trở lại </a>
+
 		</div>
-		
+
 		<div class="row layout-top-spacing">
-		    <div id="train-management" class="col-lg-12 layout-spacing">
-		        <div class="statbox widget box box-shadow">
-		                <div class="widget-header">
-		                    <div class="row">
-		                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-		                            <h4>Thêm mới</h4>
-		                        </div>
-		                    </div>
-		                </div>
-		            <div class="widget-content widget-content-area">
-		               <div class="col-12">
-						    <form th:action="@{/train/create}" th:object="${train}" id="general-settings" method="POST">
+			<div id="train-management" class="col-lg-12 layout-spacing">
+				<div class="statbox widget box box-shadow">
+					<div class="widget-header">
+						<div class="row">
+							<div class="col-xl-12 col-md-12 col-sm-12 col-12">
+								<h4>Thêm mới</h4>
+							</div>
+						</div>
+					</div>
+					<div class="widget-content widget-content-area">
+						<div class="col-12">
+							<form th:action="@{/train/create}" th:object="${train}"
+								id="general-settings" method="POST">
 								<div class="row">
-						 			<div class="col-md-6">
-								        <div class="form-group mb-4">
-										    <label for="train">Tên loại tàu <strong class="text-danger">*</strong></label> 
-										    <input type="text" 
-											    name="trainname"
-											    id="trainname"
-												class="form-control" 
-												placeholder="Tên loại tàu"
-											>
-											
+									<div class="col-md-6">
+										<div class="form-group mb-4">
+											<label for="train">Tên loại tàu<strong
+												class="text-danger">*</strong></label> <input type="text"
+												name="trainname" id="trainname" class="form-control"
+												placeholder="Tên loại tàu">
+
 										</div>
 									</div>
 									<div class="col-md-6">
-								        <div class="form-group mb-4">
-										    <label for="train">Số lượng toa<strong class="text-danger">*</strong></label> 
-										    <input type="number" 
-											    name="coachcount"
-											    id="coachcount"
-												class="form-control" 
-												placeholder="Số lượng toa"
-											>
+										<div class="form-group mb-4">
+											<label for="train">Số lượng toa<strong
+												class="text-danger">*</strong></label> <input type="number"
+												name="coachcount" id="coachcount" class="form-control"
+												placeholder="Số lượng toa">
 										</div>
 									</div>
 								</div>
-								
+
 								<div class="row">
-						 			<div class="col-md-6">
-								        <div class="form-group mb-4">
-										    <label for="train">Mô tả <strong class="text-danger">*</strong></label> 
-										    <input type="text" 
-											    name="description"
-											    id="description"
-												class="form-control" 
-												placeholder="Mô tả"
-											>
+									<div class="col-md-6">
+										<div class="form-group mb-4">
+											<label for="train">Mô tả<strong class="text-danger">*</strong></label>
+											<input type="text" name="description" id="description"
+												class="form-control" placeholder="Mô tả">
 										</div>
 									</div>
-									
-								</div>						
-								
-								<button type="submit" class="btn btn-primary">Hoàn tất</button>						
-						    </form>
+
+								</div>
+
+								<button type="submit" class="btn btn-primary">Hoàn tất</button>
+							</form>
 						</div>
-		            </div>
-		        </div>
-		    </div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-	
+
 	<!--  BEGIN CUSTOM SCRIPTS FILE  -->
-	 <div layout:fragment="footerFiles">
-		
-	</div>
-	 <!--  END CUSTOM SCRIPTS FILE  -->
+	<div layout:fragment="footerFiles"></div>
+	<!--  END CUSTOM SCRIPTS FILE  -->
 </body>
 
 </html>
