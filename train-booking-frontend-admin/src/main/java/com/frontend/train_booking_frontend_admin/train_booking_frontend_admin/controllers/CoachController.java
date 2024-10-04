@@ -47,7 +47,7 @@ public class CoachController {
 		} else {
 			redirectAttributes.addFlashAttribute("error", "Thêm mới toa thất bại!");
 		}
-		return "redirect:/train/index";
+		return "redirect:/coach/index";
 	}
 
 	@GetMapping("/edit/{id}")
