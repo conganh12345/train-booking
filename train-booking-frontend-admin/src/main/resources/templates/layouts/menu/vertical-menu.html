@@ -55,8 +55,6 @@
 			</a>
 			</li>
 
-
-
 			<li class="menu menu-heading">
 				<div class="heading">
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -69,52 +67,24 @@
 				</div>
 			</li>
 
-			<li th:class="${page == 'user'} ? 'menu active' : 'menu'"><a
-				th:href="@{/user/index}" class="dropdown-toggle">
-					<div>
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-							viewBox="0 0 24 24" fill="none" stroke="currentColor"
-							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-							class="feather feather-user">
-                            <path
-								d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-						<span>Người dùng</span>
-					</div>
-			</a></li>
+			<li th:class="${page == 'user'} ? 'menu active' : 'menu'">
+				<a th:href="@{/user/index}" class="dropdown-toggle">
+						<div>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+								viewBox="0 0 24 24" fill="none" stroke="currentColor"
+								stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+								class="feather feather-user">
+	                            <path
+									d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+	                            <circle cx="12" cy="7" r="4"></circle>
+	                        </svg>
+							<span>Người dùng</span>
+						</div>
+				</a>
+			</li>
 
-			<li th:class="${page == 'train'} ? 'menu active' : 'menu'"><a
-				th:href="@{/train/index}" class="dropdown-toggle">
-					<div>
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-							viewBox="0 0 24 24" fill="none" stroke="currentColor"
-							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-							class="feather feather-anchor">
-							<circle cx="12" cy="5" r="3"></circle>
-							<line x1="12" y1="22" x2="12" y2="8"></line>
-							<path d="M5 12H2a10 10 0 0 0 20 0h-3"></path></svg>
-						<span>Loại tàu</span>
-					</div>
-			</a></li>
-
-			<li th:class="${page == 'booking'} ? 'menu active' : 'menu'"><a
-				th:href="@{/booking/index}" class="dropdown-toggle">
-					<div>
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-							viewBox="0 0 24 24" fill="none" stroke="currentColor"
-							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-							class="feather feather-globe">
-							<circle cx="12" cy="12" r="10"></circle>
-							<line x1="2" y1="12" x2="22" y2="12"></line>
-							<path
-								d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-						<span>Đặt vé</span>
-					</div>
-			</a></li>
-
-			<li th:class="${page == 'coach'} ? 'menu active' : 'menu'"><a
-				th:href="@{/coach/index}" class="dropdown-toggle">
+			<li th:class="${page == 'coach' && page == 'train'} ? 'menu active' : 'menu'">
+				<a href="#dashboard" data-bs-toggle="collapse" th:aria-expanded="${page == 'coach' || page == 'train'} ? true : false" class="dropdown-toggle">
 					<div>
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 							viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -122,24 +92,41 @@
 							class="feather feather-table">
 							<path
 								d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"></path></svg>
-						<span>Toa</span>
+						<span>Loại Tàu</span>
 					</div>
-			</a></li>
-
-			<li th:class="${page == 'ticket'} ? 'menu active' : 'menu'"><a
-				th:href="@{/ticket/index}" class="dropdown-toggle">
 					<div>
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-							viewBox="0 0 24 24" fill="none" stroke="currentColor"
-							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-							class="feather feather-user">
-                            <path
-								d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-						<span>Vé</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+				</a>
+				<ul th:class="${page == 'coach' || page == 'train'} ? 'collapse submenu list-unstyled show' : 'collapse submenu list-unstyled'" id="dashboard" data-bs-parent="#accordionExample">
+                    <li th:class="${page == 'train'} ? 'active' : ''">
+                        <a th:href="@{/train/index}">Quản lý Tàu </a>
+                    </li>
+                    <li th:class="${page == 'coach'} ? 'active' : ''">
+                        <a th:href="@{/coach/index}">Quản lý Toa </a>
+                    </li>
+                </ul>
+			</li>
+			
+			<li th:class="${page == 'ticket' && page == 'booking'} ? 'menu active' : 'menu'">
+				<a href="#ticket" data-bs-toggle="collapse" th:aria-expanded="${page == 'ticket' || page == 'booking'} ? true : false" class="dropdown-toggle">
+					<div>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+						<span>Vé tàu</span>
 					</div>
-			</a></li>
+					<div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+				</a>
+				<ul th:class="${page == 'ticket' || page == 'booking'} ? 'collapse submenu list-unstyled show' : 'collapse submenu list-unstyled'" id="ticket" data-bs-parent="#accordionExample">
+                    <li th:class="${page == 'ticket'} ? 'active' : ''">
+                        <a th:href="@{/ticket/index}" >Quản Lý Vé Tàu </a>
+                    </li>
+                    <li th:class="${page == 'booking'} ? 'active' : ''">
+                        <a th:href="@{/booking/index}">Quản Lý Đặt Vé </a>
+                    </li>
+                </ul>
+			</li>
 		</ul>
 
 	</nav>
