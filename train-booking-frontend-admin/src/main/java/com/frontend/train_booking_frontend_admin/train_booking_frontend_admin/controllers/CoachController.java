@@ -48,6 +48,7 @@ public class CoachController {
 	@PostMapping("/create")
 	public String create(@ModelAttribute() Coach coach, BindingResult result, Model model,
 			RedirectAttributes redirectAttributes) {
+		System.out.println("test nòa:    "+ coach.getTrainId());
 		if (coachService.addCoach(coach)) {
 			redirectAttributes.addFlashAttribute("success", "Thêm mới toa thành công!");
 		} else {

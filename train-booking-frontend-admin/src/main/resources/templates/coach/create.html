@@ -44,8 +44,8 @@
 									<div class="col-md-6">
 										<div class="form-group mb-4">
 											<label for="train">Chọn tàu<strong
-												class="text-danger">*</strong></label> <select name="train_id"
-												id="train_id" class="form-control">
+												class="text-danger">*</strong></label> <select name="trainId"
+												id="trainId" class="form-control">
 												<option value="" selected>Chọn</option>
 												<option th:each="train : ${trains}" th:value="${train.id}"
 													th:text="${train.trainname}"></option>
