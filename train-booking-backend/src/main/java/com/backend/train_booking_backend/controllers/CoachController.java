@@ -1,5 +1,6 @@
 package com.backend.train_booking_backend.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.backend.train_booking_backend.exception.CoachValidate;
 import com.backend.train_booking_backend.models.Coach;
+import com.backend.train_booking_backend.models.User;
 import com.backend.train_booking_backend.services.ICoachService;
 
 @RestController
@@ -43,7 +45,7 @@ public class CoachController {
 	public ResponseEntity<List<Coach>> getAllCoach() {
 		List<Coach> coach = coachService.getAllCoachs();
 		if (coach.isEmpty()) {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			coach = new ArrayList<Coach>();
 		}
 		return new ResponseEntity<>(coach, HttpStatus.OK);
 	}

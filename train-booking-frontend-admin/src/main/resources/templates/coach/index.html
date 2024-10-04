@@ -3,7 +3,7 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layouts/base-layout.html}">
 <head>
-<title>Danh sách tàu</title>
+<title>Danh sách Toa</title>
 
 <div layout:fragment="headerFiles">
 	<link rel="stylesheet" type="text/css"
@@ -29,9 +29,9 @@
 		<div class="page-meta">
 			<nav class="breadcrumb-style-one" aria-label="breadcrumb">
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="#">tàu</a></li>
+					<li class="breadcrumb-item"><a href="#">Toa</a></li>
 					<li class="breadcrumb-item active" aria-current="page">Quản lý
-						tàu</li>
+						toa</li>
 				</ol>
 			</nav>
 		</div>
@@ -43,33 +43,33 @@
 					<div class="widget-header">
 						<div class="row">
 							<div class="col-xl-12 col-md-12 col-sm-12 col-12">
-								<h4>Quản lý tàu</h4>
+								<h4>Quản lý toa</h4>
 							</div>
 						</div>
 					</div>
 					<div class="widget-content widget-content-area">
 						<div class="layout-top-spacing ps-3 pe-3 col-12 mb-3">
-							<a th:href="@{/train/create}" class="btn btn-primary">Thêm mới</a>
+							<a th:href="@{/coach/create}" class="btn btn-primary">Thêm mới</a>
 						</div>
-						<table id="train-table" class="table style-3 dt-table-hover"
+						<table id="coach-table" class="table style-3 dt-table-hover"
 							style="width: 100%">
 							<thead>
 								<tr>
 									<th style="width: 5%">STT</th>
-									<th>Tên tàu</th>
-									<th>Số lượng toa</th>
+									<th>Tên toa</th>
+									<th>Số lượng ghế</th>
 									<th>Mô tả</th>
 									<th class="no-content" style="width: 5%">Thao tác</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="train, stat : ${trains}">
+								<tr th:each="coach, stat : ${coachs}">
 									<td th:text="${stat.count}"></td>
-									<td th:text="${train.trainname}"></td>
-									<td th:text="${train.coachcount}"></td>
-									<td th:text="${train.description}" class="text-truncate"
+									<td th:text="${coach.coachName}"></td>
+									<td th:text="${coach.seatCount}"></td>
+									<td th:text="${coach.description}" class="text-truncate"
 										style="max-width: 250px;"></td>
-									<td><a th:href="@{/train/edit/{id}(id=${train.id})}"
+									<td><a th:href="@{/coach/edit/{id}(id=${coach.id})}"
 										class="bs-tooltip edit" data-bs-toggle="tooltip"
 										data-bs-placement="top"> <svg
 												xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -82,7 +82,7 @@
 								                </path>
 								            </svg>
 									</a> <a href="#" class="bs-tooltip delete"
-										th:data-train-id="${train.id}" data-bs-toggle="tooltip"
+										th:data-coach-id="${coach.id}" data-bs-toggle="tooltip"
 										data-bs-placement="top"> <svg
 												xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 												viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -112,7 +112,7 @@
 		<script
 			src="/plugins/table/datatable/extensions/fixed-columns/fixed-columns.datatables.min.js"></script>
 		<script>
-			$('#train-table')
+			$('#coach-table')
 					.DataTable(
 							{
 								"dom" : "<'dt--top-section'<'row'<'col-12 col-sm-6 d-flex justify-content-sm-start justify-content-center'l><'col-12 col-sm-6 d-flex justify-content-sm-end justify-content-center mt-sm-0 mt-3'f>>>"
@@ -139,22 +139,22 @@
 
 		<script>
 			$(document).ready(function() {
-				let trainIdToDelete;
+				let coachIdToDelete;
 
 				$('.delete').on('click', function(e) {
 					e.preventDefault();
-					trainIdToDelete = $(this).data('train-id');
+					coachIdToDelete = $(this).data('coach-id');
 					$('#deleteModal').modal('show');
 				});
 
 				$('#confirmDelete').on('click', function() {
 					$.ajax({
-						url : `/train/delete/${trainIdToDelete}`,
+						url : `/coach/delete/${coachIdToDelete}`,
 						type : 'DELETE',
 						success : function(response) {
 
 							Snackbar.show({
-								text : 'Xóa tàu thành công',
+								text : 'Xóa toa thành công',
 								textColor : '#ddf5f0',
 								backgroundColor : '#00ab55',
 								actionText : 'Bỏ qua',
@@ -165,7 +165,7 @@
 						},
 						error : function() {
 							Snackbar.show({
-								text : 'Xóa tàu thất bại',
+								text : 'Xóa toa thất bại',
 								textColor : '#fbeced',
 								backgroundColor : '#e7515a',
 								actionText : 'Bỏ qua',
