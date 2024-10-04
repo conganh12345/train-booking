@@ -49,6 +49,8 @@
 												placeholder="Tên loại tàu" th:value="${train.trainname}">
 										</div>
 									</div>
+								</div>
+								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group mb-4">
 											<label for="train">Số lượng toa<strong
@@ -62,10 +64,10 @@
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group mb-4">
-											<label for="train">Mô tả<strong
-												class="text-danger">*</strong></label> <input type="text"
-												name="description" id="description" class="form-control"
-												placeholder="Mô tả" th:value="${train.description}">
+											<label for="train">Mô tả<strong class="text-danger">*</strong></label>
+											<textarea name="description" id="description"
+												class="form-control" placeholder="Mô tả"
+												th:text="${train.description}"></textarea>
 										</div>
 									</div>
 								</div>

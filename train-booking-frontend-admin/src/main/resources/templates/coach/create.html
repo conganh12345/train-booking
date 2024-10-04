@@ -43,24 +43,38 @@
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group mb-4">
+											<label for="train">Chọn tàu<strong
+												class="text-danger">*</strong></label> <select name="train_id"
+												id="train_id" class="form-control">
+												<option value="" selected>Chọn</option>
+												<option th:each="train : ${trains}" th:value="${train.id}"
+													th:text="${train.trainname}"></option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+
+									<div class="col-md-6">
+										<div class="form-group mb-4">
 											<label for="coach">Tên toa<strong class="text-danger">*</strong></label>
 											<input type="text" name="coachName" id="coachName"
 												class="form-control" placeholder="Tên toa">
 
 										</div>
 									</div>
+								</div>
 
+								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group mb-4">
 											<label for="coach">Mô tả<strong class="text-danger">*</strong></label>
-											<input type="text" name="description" id="description"
-												class="form-control" placeholder="Mô tả">
+											<textarea type="text" name="description" id="description"
+												class="form-control" placeholder="Mô tả"></textarea>
 
 										</div>
 									</div>
-
 								</div>
-
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group mb-4">

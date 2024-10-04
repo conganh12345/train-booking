@@ -15,13 +15,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.models.Coach;
+import com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.models.Train;
 import com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.services.CoachService;
+import com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.services.TrainService;
 
 @Controller
 @RequestMapping("/coach")
 public class CoachController {
 	@Autowired
 	private CoachService coachService;
+	@Autowired
+	private TrainService trainService;
 
 	@GetMapping("/index")
 	public String index(Model model) {
@@ -34,7 +38,9 @@ public class CoachController {
 
 	@GetMapping("/create")
 	public String create(Model model) {
-		model.addAttribute("page", "coach");
+		List<Train> trains = trainService.getAllTrains();
+		
+		model.addAttribute("page", "coach").addAttribute("trains", trains);
 
 		return "coach/create";
 	}
