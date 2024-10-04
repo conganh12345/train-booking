@@ -63,14 +63,14 @@ public class UserController {
 
 	@PostMapping
 	public ResponseEntity<User> addUser(@RequestBody User user) {
-//		validation.validate(user);
+		validation.validate(user);
 		User createdUser = userService.addUser(user);
 		return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable Integer id) {
-//		validation.validate(user);
+		validation.validate(user);
 		User updatedUser = userService.updateUser(id, user);
 		if (updatedUser == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
