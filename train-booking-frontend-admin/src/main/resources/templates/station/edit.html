@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/base-layout.html}">
+<head>
+<title>Chỉnh sửa nhà ga</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<!-- BREADCRUMB -->
+		<div class="page-meta">
+			<nav class="breadcrumb-style-one" aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#">Nhà ga</a></li>
+					<li class="breadcrumb-item" aria-current="page"><a th:href="@{/station/index}">Quản lý nhà ga</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Chỉnh sửa nhà ga</li>
+				</ol>
+			</nav>
+		</div>
+		<!-- /BREADCRUMB -->
+		
+		<div class="layout-top-spacing col-12">
+		<a th:href="@{/station/index}" class="btn">
+		    Trở lại
+		</a>
+				
+		</div>
+		
+		<div class="row layout-top-spacing">
+		    <div id="station-management" class="col-lg-12 layout-spacing">
+		        <div class="statbox widget box box-shadow">
+		                <div class="widget-header">
+		                    <div class="row">
+		                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+		                            <h4>Chỉnh sửa</h4>
+		                        </div>
+		                    </div>
+		                </div>
+		            <div class="widget-content widget-content-area">
+		               <div class="col-12">
+						    <form th:action="@{/station/update/{id}(id=${station.id})}" th:object="${station}" id="general-settings" method="POST">
+								<div class="row">
+						 			<div class="col-md-6">
+								        <div class="form-group mb-4">
+										    <label for="station">Tên nhà ga <strong class="text-danger">*</strong></label> 
+										    <input type="text" 
+											    name="stationname"
+											    id="stationname"
+												class="form-control" 
+												placeholder="Tên nhà ga"
+												th:value="${station.stationname}"
+											>
+										</div>
+									</div>
+									<div class="col-md-6">
+								        <div class="form-group mb-4">
+										    <label for="station">Mô tả <strong class="text-danger">*</strong></label> 
+										    <input type="text" 
+											    name="description"
+											    id="description"
+												class="form-control" 
+												placeholder="Mô tả"
+												th:value="${station.description}"
+											>
+										</div>
+									</div>
+								</div>														
+								<div class="form-group mb-4">
+								    <label for="station">Địa chỉ <strong class="text-danger">*</strong></label> 
+								    <input type="text" 
+									    name="address"
+									    id="address"
+										class="form-control" 
+										placeholder="Địa chỉ"
+										th:value="${station.address}"
+									>
+								</div>
+								
+								<button type="submit" class="btn btn-primary">Hoàn tất</button>						
+						    </form>
+						</div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	</div>
+	
+	<!--  BEGIN CUSTOM SCRIPTS FILE  -->
+	 <div layout:fragment="footerFiles">
+		
+	</div>
+	 <!--  END CUSTOM SCRIPTS FILE  -->
+</body>
+
+</html>
