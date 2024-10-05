@@ -43,9 +43,9 @@ public class StationController {
 	public String create(@ModelAttribute() Station station, BindingResult result, Model model,
 			RedirectAttributes redirectAttributes) {
 		if (stationService.addStation(station)) {
-			redirectAttributes.addFlashAttribute("success", "Thêm mới tàu thành công!");
+			redirectAttributes.addFlashAttribute("success", "Thêm mới nhà ga thành công!");
 		} else {
-			redirectAttributes.addFlashAttribute("error", "Thêm mới tàu thất bại!");
+			redirectAttributes.addFlashAttribute("error", "Thêm mới nhà ga thất bại!");
 		}
 		return "redirect:/station/index";
 	}
@@ -64,9 +64,9 @@ public class StationController {
 			RedirectAttributes redirectAttributes) {
 		station.setId(id);
 		if (stationService.updateStation(station)) {
-			redirectAttributes.addFlashAttribute("success", "Cập nhật tàu thành công!");
+			redirectAttributes.addFlashAttribute("success", "Cập nhật nhà ga thành công!");
 		} else {
-			redirectAttributes.addFlashAttribute("error", "Cập nhật tàu thất bại!");
+			redirectAttributes.addFlashAttribute("error", "Cập nhật nhà ga thất bại!");
 		}
 		return "redirect:/station/index";
 	}
@@ -76,7 +76,7 @@ public class StationController {
 		if (stationService.deleteStation(id)) {
 			return ResponseEntity.ok().build();
 		} else {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Không thể xóa tàu.");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Không thể xóa nhà ga.");
 		}
 	}
 }
