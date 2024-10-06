@@ -16,5 +16,5 @@ public interface ITrainService {
 
 	Train getTrainByTrainname(String trainname);
 
-	Optional<Train> deleteTrain(Integer id);
+	boolean deleteTrain(Integer id);
 }

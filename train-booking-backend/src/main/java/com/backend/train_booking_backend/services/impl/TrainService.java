@@ -58,16 +58,14 @@ public class TrainService implements ITrainService {
 
 	@Override
 	@Transactional
-	public Optional<Train> deleteTrain(Integer id) {
+	public boolean deleteTrain(Integer id) {
 	    try {
-	        Optional<Train> trainOpt = trainRepo.findById(id);
-	        if (trainOpt.isPresent()) {
-	        	Train train = trainOpt.get();
-	        	trainRepo.deleteById(id);
-	            return Optional.of(train); 
+	        if (trainRepo.existsById(id)) {
+	            trainRepo.deleteById(id);
+	            return true; 
 	        } else {
 	            System.out.println("Train with ID " + id + " not found.");
-	            return Optional.empty();
+	            return false;
 	        }
 	    } catch (Exception e) {
 	        throw new RuntimeException("Đã xảy ra lỗi khi xóa tàu.", e);

@@ -5,7 +5,7 @@ public class Coach {
 	private String coachName;
 	private int seatCount;
 	private String description;
-	private Integer trainId;
+	private Train train;
 
 	public Integer getId() {
 		return id;
@@ -39,11 +39,11 @@ public class Coach {
 		this.description = description;
 	}
 
-	 public Integer getTrainId() { 
-        return trainId;
+	public Train getTrain() {
+        return train;
     }
 
-    public void setTrainId(Integer trainId) { 
-        this.trainId = trainId;
+    public void setTrain(Train train) {
+        this.train = train;
     }
 }

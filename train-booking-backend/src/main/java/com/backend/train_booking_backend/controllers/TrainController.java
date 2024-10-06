@@ -86,9 +86,8 @@ public class TrainController {
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Train> deleteTrain(@PathVariable Integer id) {
-	    Optional<Train> deletedTrain = trainService.deleteTrain(id); 
-	    if (deletedTrain.isPresent()) {
-	        return new ResponseEntity<>(deletedTrain.get(), HttpStatus.OK);
+	    if (trainService.deleteTrain(id)) {
+	    	return new ResponseEntity<>(HttpStatus.OK);
 	    } else {
 	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	    }
