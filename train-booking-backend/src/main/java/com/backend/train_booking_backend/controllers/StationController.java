@@ -89,9 +89,8 @@ public class StationController {
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Station> deleteStation(@PathVariable Integer id) {
-		Optional<Station> deletedStation = stationService.deleteStation(id);
-		if (deletedStation.isPresent()) {
-			return new ResponseEntity<>(deletedStation.get(), HttpStatus.OK);
+		if (stationService.deleteStation(id)) {
+			return new ResponseEntity<>(HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}

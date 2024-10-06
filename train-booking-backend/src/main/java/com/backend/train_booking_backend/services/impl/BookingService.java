@@ -58,22 +58,20 @@ public class BookingService implements IBookingService {
 	public Booking getBookingByFullName(String fullname) {
 		return bookingRepo.findBookingByFullName(fullname);
 	}
-
+	
 	@Override
 	@Transactional
-	public Optional<Booking> deleteBooking(Integer id) {
-		try {
-	        Optional<Booking> bookingOpt = bookingRepo.findById(id);
-	        if (bookingOpt.isPresent()) {
-	        	Booking booking = bookingOpt.get();
+	public boolean deleteBooking(Integer id) {
+	    try {
+	        if (bookingRepo.existsById(id)) {
 	        	bookingRepo.deleteById(id);
-	            return Optional.of(booking); 
+	            return true; 
 	        } else {
-	            System.out.println("Booking with ID " + id + " not found.");
-	            return Optional.empty();
+	            System.out.println("Train with ID " + id + " not found.");
+	            return false;
 	        }
 	    } catch (Exception e) {
-	        throw new RuntimeException("Đã xảy ra lỗi khi xóa đặt vé.", e);
+	        throw new RuntimeException("Đã xảy ra lỗi khi xóa tàu.", e);
 	    }
 	}
 }

@@ -16,5 +16,5 @@ public interface IBookingService {
 
 	Booking getBookingByFullName(String fullname);
 
-	Optional<Booking> deleteBooking(Integer id);
+	boolean deleteBooking(Integer id);
 }
