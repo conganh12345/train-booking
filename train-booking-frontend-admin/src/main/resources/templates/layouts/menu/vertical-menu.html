@@ -67,24 +67,26 @@
 				</div>
 			</li>
 
-			<li th:class="${page == 'user'} ? 'menu active' : 'menu'">
-				<a th:href="@{/user/index}" class="dropdown-toggle">
-						<div>
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-								viewBox="0 0 24 24" fill="none" stroke="currentColor"
-								stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-								class="feather feather-user">
+			<li th:class="${page == 'user'} ? 'menu active' : 'menu'"><a
+				th:href="@{/user/index}" class="dropdown-toggle">
+					<div>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+							viewBox="0 0 24 24" fill="none" stroke="currentColor"
+							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+							class="feather feather-user">
 	                            <path
-									d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+								d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
 	                            <circle cx="12" cy="7" r="4"></circle>
 	                        </svg>
-							<span>Người dùng</span>
-						</div>
-				</a>
-			</li>
+						<span>Người dùng</span>
+					</div>
+			</a></li>
 
-			<li th:class="${page == 'coach' && page == 'train'} ? 'menu active' : 'menu'">
-				<a href="#dashboard" data-bs-toggle="collapse" th:aria-expanded="${page == 'coach' || page == 'train'} ? true : false" class="dropdown-toggle">
+			<li
+				th:class="${page == 'coach' && page == 'train'} ? 'menu active' : 'menu'">
+				<a href="#dashboard" data-bs-toggle="collapse"
+				th:aria-expanded="${page == 'coach' || page == 'train'} ? true : false"
+				class="dropdown-toggle">
 					<div>
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 							viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -95,41 +97,71 @@
 						<span>Loại Tàu</span>
 					</div>
 					<div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    </div>
-				</a>
-				<ul th:class="${page == 'coach' || page == 'train'} ? 'collapse submenu list-unstyled show' : 'collapse submenu list-unstyled'" id="dashboard" data-bs-parent="#accordionExample">
-                    <li th:class="${page == 'train'} ? 'active' : ''">
-                        <a th:href="@{/train/index}">Quản lý Tàu </a>
-                    </li>
-                    <li th:class="${page == 'coach'} ? 'active' : ''">
-                        <a th:href="@{/coach/index}">Quản lý Toa </a>
-                    </li>
-                </ul>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+							viewBox="0 0 24 24" fill="none" stroke="currentColor"
+							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+							class="feather feather-chevron-right">
+							<polyline points="9 18 15 12 9 6"></polyline></svg>
+					</div>
+			</a>
+				<ul
+					th:class="${page == 'coach' || page == 'train'} ? 'collapse submenu list-unstyled show' : 'collapse submenu list-unstyled'"
+					id="dashboard" data-bs-parent="#accordionExample">
+					<li th:class="${page == 'train'} ? 'active' : ''"><a
+						th:href="@{/train/index}">Quản lý Tàu </a></li>
+					<li th:class="${page == 'coach'} ? 'active' : ''"><a
+						th:href="@{/coach/index}">Quản lý Toa </a></li>
+				</ul>
 			</li>
-			
-			<li th:class="${page == 'ticket' && page == 'booking'} ? 'menu active' : 'menu'">
-				<a href="#ticket" data-bs-toggle="collapse" th:aria-expanded="${page == 'ticket' || page == 'booking'} ? true : false" class="dropdown-toggle">
+
+			<li
+				th:class="${page == 'ticket' && page == 'booking'} ? 'menu active' : 'menu'">
+				<a href="#ticket" data-bs-toggle="collapse"
+				th:aria-expanded="${page == 'ticket' || page == 'booking'} ? true : false"
+				class="dropdown-toggle">
 					<div>
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+							viewBox="0 0 24 24" fill="none" stroke="currentColor"
+							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+							class="feather feather-globe">
+							<circle cx="12" cy="12" r="10"></circle>
+							<line x1="2" y1="12" x2="22" y2="12"></line>
+							<path
+								d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
 						<span>Vé tàu</span>
 					</div>
 					<div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    </div>
-				</a>
-				<ul th:class="${page == 'ticket' || page == 'booking'} ? 'collapse submenu list-unstyled show' : 'collapse submenu list-unstyled'" id="ticket" data-bs-parent="#accordionExample">
-                    <li th:class="${page == 'ticket'} ? 'active' : ''">
-                        <a th:href="@{/ticket/index}" >Quản Lý Vé Tàu </a>
-                    </li>
-                    <li th:class="${page == 'booking'} ? 'active' : ''">
-                        <a th:href="@{/booking/index}">Quản Lý Đặt Vé </a>
-                    </li>
-                    <li th:class="${page == 'station'} ? 'active' : ''">
-                        <a th:href="@{/station/index}" >Quản Lý Nhà Ga </a>
-                    </li>
-                </ul>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+							viewBox="0 0 24 24" fill="none" stroke="currentColor"
+							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+							class="feather feather-chevron-right">
+							<polyline points="9 18 15 12 9 6"></polyline></svg>
+					</div>
+			</a>
+				<ul
+					th:class="${page == 'ticket' || page == 'booking'} ? 'collapse submenu list-unstyled show' : 'collapse submenu list-unstyled'"
+					id="ticket" data-bs-parent="#accordionExample">
+					<li th:class="${page == 'ticket'} ? 'active' : ''"><a
+						th:href="@{/ticket/index}">Quản Lý Vé Tàu </a></li>
+					<li th:class="${page == 'booking'} ? 'active' : ''"><a
+						th:href="@{/booking/index}">Quản Lý Đặt Vé </a></li>
+
+				</ul>
 			</li>
+
+			<li th:class="${page == 'station'} ? 'menu active' : 'menu'"><a
+				th:href="@{/station/index}" class="dropdown-toggle">
+					<div>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+							viewBox="0 0 24 24" fill="none" stroke="currentColor"
+							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+							class="feather feather-book">
+							<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+							<path
+								d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+						<span>Nhà Ga</span>
+					</div>
+			</a></li>
 		</ul>
 
 	</nav>
