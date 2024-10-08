@@ -34,10 +34,11 @@ public class PaymentController {
 	}
 
 	@GetMapping("/create")
-	public String create(Model model) {
-		model.addAttribute("page", "payment");
-
-		return "payment/create";
+	public String createPayment(Model model) {
+		Payment payment = new Payment(); 
+		payment.setAmount(0); 
+		model.addAttribute("payment", payment); 
+		return "payment/create"; 
 	}
 
 	@PostMapping("/create")
