@@ -21,64 +21,58 @@ import com.frontend.train_booking_frontend_customer.services.IUserService;
 
 @Controller
 @RequestMapping("/user")
-public class UserController 
-{
+public class UserController {
 	@Autowired
 	private IUserService userService;
-	
-    @GetMapping("/index")
-    public String index(Model model) 
-    {
-    	List<User> users = userService.getAllUsers();
-    	
-    	model.addAttribute("page", "user");
-		model.addAttribute("users", users);
-        
-    	return "user/signIn";
-    } 
 
-    @GetMapping("/base-layout")
-    public String showBaseLayout() {
-        return "layouts/base-layout"; 
-    }
-    
-    @GetMapping("/login")
-    public String login() {
-    	return "user/signIn";
-    }
+	@GetMapping("/index")
+	public String index(Model model) {
+		List<User> users = userService.getAllUsers();
 
-    @PostMapping("/check-login")
-    public ResponseEntity<String> handleLogin(@RequestParam String email, @RequestParam String password) {
-    	User user = userService.getUserByEmailPassword(email, password);
-        if (user != null) {
-            return ResponseEntity.ok("Login successful!"); // Send success response
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid email or password."); // Send error response
-        }
-    }
-    
-    @PostMapping("/check-email-exist")
-    public ResponseEntity<String> checkEmailExist(@RequestParam String email) {
-        User user = userService.getUserByEmail(email);
-        if (user != null) {
-            return ResponseEntity.ok("Email exists"); // Email exists
-        } else {
-            return null;
-        }
-    }
+		model.addAttribute("page", "user").addAttribute("users", users);
 
-    
-    @GetMapping("/signup")
-    public String signup() {
-    	return "user/signup";
-    }
-    
-    @PostMapping("/register")
-    public String register(@ModelAttribute User user) {
-    	System.out.println("Sign up");
-    	userService.signUp(user);
-    	return "user/signIn";
-    }
-    
-    
+		return "user/signIn";
+	}
+
+	@GetMapping("/base-layout")
+	public String showBaseLayout() {
+		return "layouts/base-layout";
+	}
+
+	@GetMapping("/login")
+	public String login() {
+		return "user/signIn";
+	}
+
+	@PostMapping("/check-login")
+	public ResponseEntity<String> handleLogin(@RequestParam String email, @RequestParam String password) {
+		User user = userService.getUserByEmailPassword(email, password);
+		if (user != null) {
+			return ResponseEntity.ok("Đăng nhập thành công!");
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Sai email hoặc mật khẩu.");
+		}
+	}
+
+	@PostMapping("/check-email-exist")
+	public ResponseEntity<String> checkEmailExist(@RequestParam String email) {
+		User user = userService.getUserByEmail(email);
+		if (user != null) {
+			return ResponseEntity.ok("Email đã tồn tại");
+		} else {
+			return null;
+		}
+	}
+
+	@GetMapping("/signup")
+	public String signup() {
+		return "user/signup";
+	}
+
+	@PostMapping("/register")
+	public String register(@ModelAttribute User user) {
+		userService.signUp(user);
+		return "user/signIn";
+	}
+
 }

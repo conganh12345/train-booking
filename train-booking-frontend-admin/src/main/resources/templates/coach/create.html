@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/base-layout.html}">
+<head>
+<title>Thêm mới</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<!-- BREADCRUMB -->
+		<div class="page-meta">
+			<nav class="breadcrumb-style-one" aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#">Toa</a></li>
+					<li class="breadcrumb-item" aria-current="page"><a
+						th:href="@{/coach/index}">Quản lý toa</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Thêm
+						mới toa</li>
+				</ol>
+			</nav>
+		</div>
+		<!-- /BREADCRUMB -->
+
+		<div class="layout-top-spacing col-12">
+			<a th:href="@{/coach/index}" class="btn"> Trở lại </a>
+
+		</div>
+
+		<div class="row layout-top-spacing">
+			<div id="coach-management" class="col-lg-12 layout-spacing">
+				<div class="statbox widget box box-shadow">
+					<div class="widget-header">
+						<div class="row">
+							<div class="col-xl-12 col-md-12 col-sm-12 col-12">
+								<h4>Thêm mới</h4>
+							</div>
+						</div>
+					</div>
+					<div class="widget-content widget-content-area">
+						<div class="col-12">
+							<form th:action="@{/coach/create}" th:object="${coach}"
+								id="general-settings" method="POST">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group mb-4">
+											<label for="train">Chọn tàu<strong
+												class="text-danger">*</strong></label> <select name="trainId"
+												id="trainId" class="form-control">
+												<option value="" selected>Chọn</option>
+												<option th:each="train : ${trains}" th:value="${train.id}"
+													th:text="${train.trainname}"></option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+
+									<div class="col-md-6">
+										<div class="form-group mb-4">
+											<label for="coach">Tên toa<strong class="text-danger">*</strong></label>
+											<input type="text" name="coachName" id="coachName"
+												class="form-control" placeholder="Tên toa">
+
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group mb-4">
+											<label for="coach">Mô tả<strong class="text-danger">*</strong></label>
+											<textarea type="text" name="description" id="description"
+												class="form-control" placeholder="Mô tả"></textarea>
+
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group mb-4">
+											<label for="coach">Số lượng ghế<strong
+												class="text-danger">*</strong></label> <input type="number"
+												name="seatCount" id="seatCount" class="form-control"
+												placeholder="Số lượng ghế">
+										</div>
+									</div>
+								</div>
+								<button type="submit" class="btn btn-primary">Hoàn tất</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--  BEGIN CUSTOM SCRIPTS FILE  -->
+	<div layout:fragment="footerFiles"></div>
+	<!--  END CUSTOM SCRIPTS FILE  -->
+</body>
+
+</html>

@@ -1,12 +1,11 @@
 function checkEmailExist() {
 	const email = document.getElementById('email').value;
 	const emailError = document.getElementById('email-error');
-
-	// Validate the email format
 	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+	
 	if (!emailRegex.test(email)) {
-		emailError.textContent = 'Please enter a valid email address.';
-		return Promise.resolve(false); // Return false if email is invalid
+		emailError.textContent = 'Vui lòng nhập địa chỉ email.';
+		return Promise.resolve(false);
 	}
 
 	return new Promise((resolve) => {
@@ -16,7 +15,7 @@ function checkEmailExist() {
 			data: { email: email },
 			success: function(result) {
 				if (result) {
-					emailError.textContent = 'This email is already in use';
+					emailError.textContent = 'Email đã tồn tại';
 					resolve(false);
 				} else {
 					emailError.textContent = '';
@@ -43,20 +42,18 @@ $('#signUpForm').on('submit', async function(event) {
 async function validateForm() {
 	const isPasswordValid = validatePassword();
 	const isPhoneNumberValid = validatePhoneNumber();
-	const isEmailValid = await checkEmailExist(); // Await the email validation result
+	const isEmailValid = await checkEmailExist(); 
 
 	return isPasswordValid && isPhoneNumberValid && isEmailValid;
 }
 
 
 function submitForm() {
-	// Get form values
 	const name = document.getElementById("username").value;
 	const email = document.getElementById("email").value;
 	const password = document.getElementById("password").value;
 	const phoneNumber = document.getElementById("phone-number").value;
 
-	// Prepare form data
 	const formData = {
 		name: name,
 		email: email,
@@ -64,14 +61,13 @@ function submitForm() {
 		phoneNumber: phoneNumber
 	};
 
-	// Make an AJAX POST request to the backend to register the user
 	$.ajax({
 		type: "POST",
-		url: "/user/register", // Your backend register endpoint
+		url: "/user/register",
 		data: formData,
 		success: function(response) {
-			alert("Registration successful");
-			window.location.href = "/user/login"; // Redirect to login page after success
+			alert("Đăng ký thành công");
+			window.location.href = "/user/login"; 
 		},
 		error: function(error) {
 			alert("Error occurred: " + error.responseText);

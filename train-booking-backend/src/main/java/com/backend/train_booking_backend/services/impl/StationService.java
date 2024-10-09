@@ -57,22 +57,20 @@ public class StationService implements IStationService {
 	public Station getStationByStationname(String stationname) {
 		return stationRepo.findStationByStationname(stationname);
 	}
-
+	
 	@Override
 	@Transactional
-	public Optional<Station> deleteStation(Integer id) {
+	public boolean deleteStation(Integer id) {
 	    try {
-	        Optional<Station> stationOpt = stationRepo.findById(id);
-	        if (stationOpt.isPresent()) {
-	        	Station station = stationOpt.get();
+	        if (stationRepo.existsById(id)) {
 	        	stationRepo.deleteById(id);
-	            return Optional.of(station); 
+	            return true; 
 	        } else {
-	            System.out.println("Station with ID " + id + " not found.");
-	            return Optional.empty();
+	            System.out.println("Train with ID " + id + " not found.");
+	            return false;
 	        }
 	    } catch (Exception e) {
-	        throw new RuntimeException("Đã xảy ra lỗi khi xóa nhà ga.", e);
+	        throw new RuntimeException("Đã xảy ra lỗi khi xóa tàu.", e);
 	    }
 	}
 }

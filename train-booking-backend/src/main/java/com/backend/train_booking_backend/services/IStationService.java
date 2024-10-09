@@ -16,5 +16,5 @@ public interface IStationService {
 
 	Station getStationByStationname(String stationname);
 
-	Optional<Station> deleteStation(Integer id);
+	boolean deleteStation(Integer id);
 }

@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
 import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,14 +63,14 @@ public class UserController {
 
 	@PostMapping
 	public ResponseEntity<User> addUser(@RequestBody User user) {
-//		validation.validate(user);
+		validation.validate(user);
 		User createdUser = userService.addUser(user);
 		return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable Integer id) {
-//		validation.validate(user);
+		validation.validate(user);
 		User updatedUser = userService.updateUser(id, user);
 		if (updatedUser == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -90,32 +89,30 @@ public class UserController {
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<User> deleteUser(@PathVariable Integer id) {
-	    Optional<User> deletedUser = userService.deleteUser(id); 
-	    if (deletedUser.isPresent()) {
-	        return new ResponseEntity<>(deletedUser.get(), HttpStatus.OK);
-	    } else {
-	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	    }
+		Optional<User> deletedUser = userService.deleteUser(id);
+		if (deletedUser.isPresent()) {
+			return new ResponseEntity<>(deletedUser.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
-	
+
 	@GetMapping("/findByEmail/{email}")
-	public ResponseEntity<User> findUserByEmail(@PathVariable String email){
+	public ResponseEntity<User> findUserByEmail(@PathVariable String email) {
 		User user = userService.findUserByEmail(email);
-		if(user == null) {
+		if (user == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/findByEmailAndPassword/{email}/{password}")
-	public ResponseEntity<User> findUserByEmailAndPassword(
-	    @PathVariable String email, 
-	    @PathVariable String password) {
-	    
-	    User user = userService.findUserByEmailAndPassword(email, password);
-	    if(user == null) {
-	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	    }
-	    return new ResponseEntity<>(user, HttpStatus.OK);
+	public ResponseEntity<User> findUserByEmailAndPassword(@PathVariable String email, @PathVariable String password) {
+
+		User user = userService.findUserByEmailAndPassword(email, password);
+		if (user == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 }

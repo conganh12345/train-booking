@@ -1,5 +1,6 @@
 package com.backend.train_booking_backend.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +46,7 @@ public class TicketController {
 	public ResponseEntity<List<Ticket>> getAllTicket() {
 		List<Ticket> tickets = ticketService.getAllTickets();
 		if (tickets.isEmpty()) {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			tickets = new ArrayList<Ticket>();
 		}
 		return new ResponseEntity<>(tickets, HttpStatus.OK);
 	}

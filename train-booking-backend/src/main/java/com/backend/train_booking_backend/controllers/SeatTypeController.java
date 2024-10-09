@@ -25,7 +25,7 @@ import com.backend.train_booking_backend.services.ISeatTypeService;
 
 @RestController
 @Validated
-@RequestMapping("/api/seat-type")
+@RequestMapping("/api/seatType")
 public class SeatTypeController {
 	@Autowired
 	private ISeatTypeService seatTypeService;
@@ -86,11 +86,11 @@ public class SeatTypeController {
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<SeatType> deleteSeatType(@PathVariable Integer id) {
-	    Optional<SeatType> deletedSeatType = seatTypeService.deleteSeatType(id); 
-	    if (deletedSeatType.isPresent()) {
-	        return new ResponseEntity<>(deletedSeatType.get(), HttpStatus.OK);
-	    } else {
-	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	    }
+		Optional<SeatType> deletedSeatType = seatTypeService.deleteSeatType(id);
+		if (deletedSeatType.isPresent()) {
+			return new ResponseEntity<>(deletedSeatType.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 }

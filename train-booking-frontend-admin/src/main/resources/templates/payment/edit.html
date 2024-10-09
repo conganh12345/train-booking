@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/base-layout.html}">
+<head>
+<title>Chỉnh sửa thanh toán</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<!-- BREADCRUMB -->
+		<div class="page-meta">
+			<nav class="breadcrumb-style-one" aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#">Thanh toán</a></li>
+					<li class="breadcrumb-item" aria-current="page"><a th:href="@{/payment/index}">Quản lý thanh toán</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Chỉnh sửa thanh toán</li>
+				</ol>
+			</nav>
+		</div>
+		<!-- /BREADCRUMB -->
+		
+		<div class="layout-top-spacing col-12">
+		<a th:href="@{/payment/index}" class="btn">
+		    Trở lại
+		</a>
+				
+		</div>
+		
+		<div class="row layout-top-spacing">
+		    <div id="payment-management" class="col-lg-12 layout-spacing">
+		        <div class="statbox widget box box-shadow">
+		                <div class="widget-header">
+		                    <div class="row">
+		                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+		                            <h4>Chỉnh sửa</h4>
+		                        </div>
+		                    </div>
+		                </div>
+		            <div class="widget-content widget-content-area">
+		               <div class="col-12">
+						    <form th:action="@{/payment/update/{id}(id=${payment.id})}" th:object="${payment}" id="general-settings" method="POST">
+								<div class="row">
+						 			<div class="col-md-6">
+								        <div class="form-group mb-4">
+										    <label for="payment">Tổng cộng<strong class="text-danger">*</strong></label> 
+										    <input type="number" 
+											    name="amount"
+											    id="amount"
+												class="form-control" 
+												placeholder="Tổng cộng"
+												th:value="${payment.amount}"
+											>
+										</div>
+									</div>
+									<div class="col-md-6">
+								        <div class="form-group mb-4">
+										    <label for="payment">Trạng thái<strong class="text-danger">*</strong></label> 
+										    <input type="text" 
+											    name="status"
+											    id="status"
+												class="form-control" 
+												placeholder="Email"
+												th:value="${payment.status}"
+											>
+										</div>
+									</div>
+								</div>
+								
+								<div class="row">
+						 			<div class="col-md-6">
+								        <div class="form-group mb-4">
+										    <label for="payment">Phương thức thanh toán<strong class="text-danger">*</strong></label> 
+										    <input type="text" 
+											    name="paymentMethod"
+											    id="paymentMethod"
+												class="form-control" 
+												placeholder="Mật khẩu"
+												th:value="${payment.paymentMethod}"
+											>
+										</div>
+									</div>
+									<div class="col-md-6">
+								        <div class="form-group mb-4">
+										    <label for="payment">Thời gian thanh toán<strong class="text-danger">*</strong></label> 
+										    <input type="number" 
+											    name="paymentTime"
+											    id="paymentTime"
+												class="form-control" 
+												placeholder="Thời gian thanh toán"
+												th:value="${payment.paymentTime}"
+											>
+										</div>
+									</div>
+								</div>
+																
+								<button type="submit" class="btn btn-primary">Hoàn tất</button>						
+						    </form>
+						</div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	</div>
+	
+	<!--  BEGIN CUSTOM SCRIPTS FILE  -->
+	 <div layout:fragment="footerFiles">
+		
+	</div>
+	 <!--  END CUSTOM SCRIPTS FILE  -->
+</body>
+
+</html>
