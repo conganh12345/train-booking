@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.models.User;
@@ -79,5 +80,49 @@ public class UserController {
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Không thể xóa người dùng.");
 	    }
 	}
+	
+	
+	@GetMapping("/base-layout")
+    public String showBaseLayout() {
+        return "layouts/base-layout"; 
+    }
+    
+    @GetMapping("/login")
+    public String login() {
+    	return "user/signIn";
+    }
+
+    @PostMapping("/check-login")
+    public ResponseEntity<String> handleLogin(@RequestParam String email, @RequestParam String password) {
+    	User user = userService.getUserByEmailPassword(email, password);
+        if (user != null) {
+            return ResponseEntity.ok("Login successful!"); // Send success response
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid email or password."); // Send error response
+        }
+    }
+    
+    @PostMapping("/check-email-exist")
+    public ResponseEntity<String> checkEmailExist(@RequestParam String email) {
+        User user = userService.getUserByEmail(email);
+        if (user != null) {
+            return ResponseEntity.ok("Email exists"); // Email exists
+        } else {
+            return null;
+        }
+    }
+
+    
+    @GetMapping("/signup")
+    public String signup() {
+    	return "user/signup";
+    }
+    
+    @PostMapping("/register")
+    public String register(@ModelAttribute User user) {
+    	System.out.println("Sign up");
+    	userService.signUp(user);
+    	return "user/signIn";
+    }
 
 }
