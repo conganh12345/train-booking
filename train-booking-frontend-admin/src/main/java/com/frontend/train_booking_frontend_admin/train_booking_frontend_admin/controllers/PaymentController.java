@@ -35,9 +35,8 @@ public class PaymentController {
 
 	@GetMapping("/create")
 	public String createPayment(Model model) {
-		Payment payment = new Payment(); 
-		payment.setAmount(0); 
-		model.addAttribute("payment", payment); 
+		model.addAttribute("page", "payment").addAttribute("payment", new Payment()); 
+		
 		return "payment/create"; 
 	}
 
