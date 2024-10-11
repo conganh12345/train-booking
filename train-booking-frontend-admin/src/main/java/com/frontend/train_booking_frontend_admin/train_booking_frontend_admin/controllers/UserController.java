@@ -18,6 +18,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.models.User;
 import com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.services.UserService;
 
+import jakarta.validation.Valid;
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -35,14 +37,18 @@ public class UserController {
 
 	@GetMapping("/create")
 	public String create(Model model) {
-		model.addAttribute("page", "user");
+		model.addAttribute("page", "user").addAttribute("user", new User());
 
 		return "user/create";
 	}
 
 	@PostMapping("/create")
-	public String create(@ModelAttribute() User user, BindingResult result, Model model,
-			RedirectAttributes redirectAttributes) {
+	public String create(@Valid @ModelAttribute("user") User user, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+		if (result.hasErrors()) {
+			model.addAttribute("page", "user");
+			
+	        return "user/create"; 
+	    }
 		if (userService.addUser(user)) {
 			redirectAttributes.addFlashAttribute("success", "Thêm mới người dùng thành công!");
 		} else {
@@ -50,50 +56,6 @@ public class UserController {
 		}
 		return "redirect:/user/index";
 	}
-	
-	
-	@GetMapping("/base-layout")
-    public String showBaseLayout() {
-        return "layouts/base-layout"; 
-    }
-    
-    @GetMapping("/login")
-    public String login() {
-    	return "user/signIn";
-    }
-
-    @PostMapping("/check-login")
-    public ResponseEntity<String> handleLogin(@RequestParam String email, @RequestParam String password) {
-    	User user = userService.getUserByEmailPassword(email, password);
-        if (user != null) {
-            return ResponseEntity.ok("Login successful!"); // Send success response
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid email or password."); // Send error response
-        }
-    }
-    
-    @PostMapping("/check-email-exist")
-    public ResponseEntity<String> checkEmailExist(@RequestParam String email) {
-        User user = userService.getUserByEmail(email);
-        if (user != null) {
-            return ResponseEntity.ok("Email exists"); // Email exists
-        } else {
-            return null;
-        }
-    }
-
-    
-    @GetMapping("/signup")
-    public String signup() {
-    	return "user/signup";
-    }
-    
-    @PostMapping("/register")
-    public String register(@ModelAttribute User user) {
-    	System.out.println("Sign up");
-    	userService.signUp(user);
-    	return "user/signIn";
-    }
 
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable Integer id, Model model, RedirectAttributes redirectAttributes) {
@@ -105,8 +67,12 @@ public class UserController {
 	}
 
 	@PostMapping("/update/{id}")
-	public String update(@PathVariable Integer id, @ModelAttribute User user, BindingResult result,
-			RedirectAttributes redirectAttributes) {
+	public String update(@PathVariable Integer id, @Valid @ModelAttribute("user") User user, BindingResult result, RedirectAttributes redirectAttributes, Model model) {
+		if (result.hasErrors()) {
+			model.addAttribute("page", "user");
+			
+	        return "user/edit"; 
+	    }
 		user.setId(id);
 		if (userService.updateUser(user)) {
 			redirectAttributes.addFlashAttribute("success", "Cập nhật người dùng thành công!");
@@ -124,4 +90,46 @@ public class UserController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Không thể xóa người dùng.");
 		}
 	}
+	
+	@GetMapping("/base-layout")
+    public String showBaseLayout() {
+        return "redirect:/dashboard/index";
+    }
+    
+    @GetMapping("/login")
+    public String login() {
+    	return "user/signIn";
+    }
+
+    @PostMapping("/check-login")
+    public ResponseEntity<String> handleLogin(@RequestParam String email, @RequestParam String password) {
+    	User user = userService.getUserByEmailPassword(email, password);
+        if (user != null) {
+            return ResponseEntity.ok("Login successful!"); 
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid email or password.");
+        }
+    }
+    
+    @PostMapping("/check-email-exist")
+    public ResponseEntity<String> checkEmailExist(@RequestParam String email) {
+        User user = userService.getUserByEmail(email);
+        if (user != null) {
+            return ResponseEntity.ok("Email exists");
+        } else {
+            return null;
+        }
+    }
+
+    @GetMapping("/signup")
+    public String signup() {
+    	return "user/signup";
+    }
+    
+    @PostMapping("/register")
+    public String register(@ModelAttribute User user) {
+    	userService.signUp(user);
+    	
+    	return "user/signIn";
+    }
 }

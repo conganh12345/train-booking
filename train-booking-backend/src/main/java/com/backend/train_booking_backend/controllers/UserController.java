@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.backend.train_booking_backend.exception.UserValidate;
 import com.backend.train_booking_backend.models.User;
 import com.backend.train_booking_backend.repositories.UserRepository;
 import com.backend.train_booking_backend.services.IUserService;
@@ -32,7 +31,6 @@ import com.backend.train_booking_backend.services.IUserService;
 public class UserController {
 	@Autowired
 	private IUserService userService;
-	private UserValidate validation = new UserValidate();
 
 	// Exception to return error json
 	@ExceptionHandler(ValidationException.class)
@@ -63,14 +61,12 @@ public class UserController {
 
 	@PostMapping
 	public ResponseEntity<User> addUser(@RequestBody User user) {
-		validation.validate(user);
 		User createdUser = userService.addUser(user);
 		return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable Integer id) {
-		validation.validate(user);
 		User updatedUser = userService.updateUser(id, user);
 		if (updatedUser == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

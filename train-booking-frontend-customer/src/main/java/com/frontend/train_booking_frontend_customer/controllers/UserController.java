@@ -36,7 +36,7 @@ public class UserController {
 
 	@GetMapping("/base-layout")
 	public String showBaseLayout() {
-		return "layouts/base-layout";
+		return "redirect:/dashboard/index";
 	}
 
 	@GetMapping("/login")
