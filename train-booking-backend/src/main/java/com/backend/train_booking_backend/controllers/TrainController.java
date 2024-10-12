@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.backend.train_booking_backend.exception.TrainValidate;
 import com.backend.train_booking_backend.models.Train;
 import com.backend.train_booking_backend.services.ITrainService;
 
@@ -30,7 +29,6 @@ import com.backend.train_booking_backend.services.ITrainService;
 public class TrainController {
 	@Autowired
 	private ITrainService trainService;
-	private TrainValidate validation = new TrainValidate();
 
 	// Exception to return error json
 	@ExceptionHandler(ValidationException.class)
@@ -60,14 +58,12 @@ public class TrainController {
 
 	@PostMapping
 	public ResponseEntity<Train> addTrain(@RequestBody Train train) {
-		validation.validate(train);
 		Train createdTrain = trainService.addTrain(train);
 		return new ResponseEntity<>(createdTrain, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Train> updateTrain(@RequestBody Train train, @PathVariable Integer id) {
-		validation.validate(train);
 		Train updatedTrain = trainService.updateTrain(id, train);
 		if (updatedTrain == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

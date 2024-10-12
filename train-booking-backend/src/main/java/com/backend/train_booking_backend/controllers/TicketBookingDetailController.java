@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.backend.train_booking_backend.exception.TicketBookingDetailValidate;
 import com.backend.train_booking_backend.models.TicketBookingDetail;
 import com.backend.train_booking_backend.services.ITicketBookingDetailService;
 
@@ -30,7 +29,6 @@ import com.backend.train_booking_backend.services.ITicketBookingDetailService;
 public class TicketBookingDetailController {
 	@Autowired
 	private ITicketBookingDetailService ticketbookingdetailService;
-	private TicketBookingDetailValidate validation = new TicketBookingDetailValidate();
 
 	// Exception to return error json
 	@ExceptionHandler(ValidationException.class)
@@ -61,7 +59,6 @@ public class TicketBookingDetailController {
 	@PostMapping
 	public ResponseEntity<TicketBookingDetail> addTicketBookingDetail(
 			@RequestBody TicketBookingDetail ticketbookingdetail) {
-		validation.validate(ticketbookingdetail);
 		TicketBookingDetail createdTicketBookingDetail = ticketbookingdetailService
 				.addTicketBookingDetail(ticketbookingdetail);
 		return new ResponseEntity<>(createdTicketBookingDetail, HttpStatus.CREATED);
@@ -70,7 +67,6 @@ public class TicketBookingDetailController {
 	@PutMapping("/{id}")
 	public ResponseEntity<TicketBookingDetail> updateTicketBookingDetail(
 			@RequestBody TicketBookingDetail ticketbookingdetail, @PathVariable Integer id) {
-		validation.validate(ticketbookingdetail);
 		TicketBookingDetail updatedTicketBookingDetail = ticketbookingdetailService.updateTicketBookingDetail(id,
 				ticketbookingdetail);
 		if (updatedTicketBookingDetail == null) {

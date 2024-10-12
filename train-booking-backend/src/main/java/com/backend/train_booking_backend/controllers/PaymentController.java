@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.backend.train_booking_backend.exception.PaymentValidate;
 import com.backend.train_booking_backend.models.Payment;
 import com.backend.train_booking_backend.services.IPaymentService;
 
@@ -31,7 +30,6 @@ import com.backend.train_booking_backend.services.IPaymentService;
 public class PaymentController {
 	@Autowired
 	private IPaymentService paymentService;
-	private PaymentValidate validation = new PaymentValidate();
 
 	// Exception to return error json
 	@ExceptionHandler(ValidationException.class)
@@ -62,14 +60,12 @@ public class PaymentController {
 
 	@PostMapping
 	public ResponseEntity<Payment> addPayment(@RequestBody Payment payment) {
-		validation.validate(payment);
 		Payment createdPayment = paymentService.addPayment(payment);
 		return new ResponseEntity<>(createdPayment, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Payment> updatepayment(@RequestBody Payment payment, @PathVariable Integer id) {
-		validation.validate(payment);
 		Payment updatedPayment = paymentService.updatePayment(id, payment);
 		if (updatedPayment == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.backend.train_booking_backend.exception.AdminValidate;
 import com.backend.train_booking_backend.models.Admin;
 import com.backend.train_booking_backend.services.IAdminService;
 
@@ -30,7 +29,6 @@ import com.backend.train_booking_backend.services.IAdminService;
 public class AdminController {
 	@Autowired
 	private IAdminService adminService;
-	private AdminValidate validation = new AdminValidate();
 
 	// Exception to return error json
 	@ExceptionHandler(ValidationException.class)
@@ -60,14 +58,12 @@ public class AdminController {
 
 	@PostMapping
 	public ResponseEntity<Admin> addAdmin(@RequestBody Admin admin) {
-		validation.validate(admin);
 		Admin createdAdmin = adminService.addAdmin(admin);
 		return new ResponseEntity<>(createdAdmin, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Admin> updateAdmin(@RequestBody Admin admin, @PathVariable Integer id) {
-		validation.validate(admin);
 		Admin updatedAdmin = adminService.updateAdmin(id, admin);
 		if (updatedAdmin == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

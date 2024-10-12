@@ -1,10 +1,22 @@
 package com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.models;
 
+import jakarta.validation.constraints.NotEmpty;
+
+import jakarta.validation.constraints.Size;
+
 public class Station {
 	private Integer id;
-	private String stationname;
-	private String address;
-	private String description;
+	
+	@NotEmpty(message = "Tên ga không được để trống")
+    @Size(min = 3, max = 100, message = "Tên ga phải có độ dài từ 3 đến 100 ký tự")
+    private String stationname;
+
+    @NotEmpty(message = "Địa chỉ không được để trống")
+    @Size(max = 150, message = "Địa chỉ không được dài quá 150 ký tự")
+    private String address;
+
+    @Size(max = 200, message = "Mô tả không được dài quá 200 ký tự")
+    private String description;
 
 	public Integer getId() {
 		return id;

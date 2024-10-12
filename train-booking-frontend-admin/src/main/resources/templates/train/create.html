@@ -11,11 +11,11 @@
 		<div class="page-meta">
 			<nav class="breadcrumb-style-one" aria-label="breadcrumb">
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="#">Người dùng</a></li>
+					<li class="breadcrumb-item"><a href="#">Tàu</a></li>
 					<li class="breadcrumb-item" aria-current="page"><a
-						th:href="@{/train/index}">Quản lý người dùng</a></li>
+						th:href="@{/train/index}">Quản lý tàu</a></li>
 					<li class="breadcrumb-item active" aria-current="page">Thêm
-						mới người dùng</li>
+						mới tàu</li>
 				</ol>
 			</nav>
 		</div>
@@ -38,42 +38,55 @@
 					</div>
 					<div class="widget-content widget-content-area">
 						<div class="col-12">
-							<form th:action="@{/train/create}" th:object="${train}"
-								id="general-settings" method="POST">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group mb-4">
-											<label for="train">Tên loại tàu<strong
-												class="text-danger">*</strong></label> <input type="text"
-												name="trainname" id="trainname" class="form-control"
-												placeholder="Tên loại tàu">
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group mb-4">
-											<label for="train">Số lượng toa<strong
-												class="text-danger">*</strong></label> <input type="number"
-												name="coachcount" id="coachcount" class="form-control"
-												placeholder="Số lượng toa">
-										</div>
-									</div>
-								</div>
-
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group mb-4">
-											<label for="train">Mô tả<strong class="text-danger">*</strong></label>
-											<textarea name="description" id="description"
-												class="form-control" placeholder="Mô tả"></textarea>
-										</div>
-									</div>
-
-								</div>
-
-								<button type="submit" class="btn btn-primary">Hoàn tất</button>
+							<form th:action="@{/train/create}" th:object="${train}" id="general-settings" method="POST">
+							    <div class="row">
+							        <div class="col-md-6">
+							            <div class="form-group mb-4">
+							                <label for="trainname">Tên loại tàu <strong class="text-danger">*</strong></label>
+							                <input type="text" 
+							                    th:field="*{trainname}"
+							                    id="trainname"
+							                    class="form-control"
+							                    placeholder="Tên loại tàu"
+							                    th:classappend="${#fields.hasErrors('trainname') ? 'is-invalid' : ''}">
+							                <span th:if="${#fields.hasErrors('trainname')}" class="text-danger" th:errors="*{trainname}"></span>
+							            </div>
+							        </div>
+							    </div>
+							
+							    <div class="row">
+							        <div class="col-md-6">
+							            <div class="form-group mb-4">
+							                <label for="coachcount">Số lượng toa <strong class="text-danger">*</strong></label>
+							                <input type="number" 
+							                    th:field="*{coachcount}"
+							                    id="coachcount"
+							                    class="form-control"
+							                    placeholder="Số lượng toa"
+							                    th:classappend="${#fields.hasErrors('coachcount') ? 'is-invalid' : ''}">
+							                <span th:if="${#fields.hasErrors('coachcount')}" class="text-danger" th:errors="*{coachcount}"></span>
+							            </div>
+							        </div>
+							    </div>
+							
+							    <div class="row">
+							        <div class="col-md-6">
+							            <div class="form-group mb-4">
+							                <label for="description">Mô tả <strong class="text-danger">*</strong></label>
+							                <textarea 
+							                    th:field="*{description}"
+							                    id="description"
+							                    class="form-control"
+							                    placeholder="Mô tả"
+							                    th:classappend="${#fields.hasErrors('description') ? 'is-invalid' : ''}"></textarea>
+							                <span th:if="${#fields.hasErrors('description')}" class="text-danger" th:errors="*{description}"></span>
+							            </div>
+							        </div>
+							    </div>
+							
+							    <button type="submit" class="btn btn-primary">Hoàn tất</button>
 							</form>
+
 						</div>
 					</div>
 				</div>

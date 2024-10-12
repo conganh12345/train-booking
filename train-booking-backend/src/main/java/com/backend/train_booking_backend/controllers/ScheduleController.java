@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.backend.train_booking_backend.exception.ScheduleValidate;
 import com.backend.train_booking_backend.models.Schedule;
 import com.backend.train_booking_backend.services.IScheduleService;
 
@@ -31,7 +30,6 @@ import com.backend.train_booking_backend.services.IScheduleService;
 public class ScheduleController {
 	@Autowired
 	private IScheduleService scheduleService;
-	private ScheduleValidate validation = new ScheduleValidate();
 
 	// Exception to return error json
 	@ExceptionHandler(ValidationException.class)
@@ -62,14 +60,12 @@ public class ScheduleController {
 
 	@PostMapping
 	public ResponseEntity<Schedule> addSchedule(@RequestBody Schedule schedule) {
-		validation.validate(schedule);
 		Schedule createdSchedule = scheduleService.addSchedule(schedule);
 		return new ResponseEntity<>(createdSchedule, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Schedule> updateSchedule(@RequestBody Schedule schedule, @PathVariable Integer id) {
-		validation.validate(schedule);
 		Schedule updatedSchedule = scheduleService.updateSchedule(id, schedule);
 		if (updatedSchedule == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

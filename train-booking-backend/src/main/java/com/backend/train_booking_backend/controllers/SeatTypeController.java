@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.backend.train_booking_backend.exception.SeatTypeValidate;
 import com.backend.train_booking_backend.models.SeatType;
 import com.backend.train_booking_backend.services.ISeatTypeService;
 
@@ -29,7 +28,6 @@ import com.backend.train_booking_backend.services.ISeatTypeService;
 public class SeatTypeController {
 	@Autowired
 	private ISeatTypeService seatTypeService;
-	private SeatTypeValidate validation = new SeatTypeValidate();
 
 	// Exception to return error json
 	@ExceptionHandler(ValidationException.class)
@@ -60,14 +58,12 @@ public class SeatTypeController {
 
 	@PostMapping
 	public ResponseEntity<SeatType> addSeatType(@RequestBody SeatType seatType) {
-		validation.validate(seatType);
 		SeatType createdSeatType = seatTypeService.addSeatType(seatType);
 		return new ResponseEntity<>(createdSeatType, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<SeatType> updateSeatType(@RequestBody SeatType seatType, @PathVariable Integer id) {
-		validation.validate(seatType);
 		SeatType updatedSeatType = seatTypeService.updateSeatType(id, seatType);
 		if (updatedSeatType == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.backend.train_booking_backend.exception.BookingValidate;
 import com.backend.train_booking_backend.models.Booking;
 import com.backend.train_booking_backend.services.IBookingService;
 
@@ -30,7 +29,6 @@ import com.backend.train_booking_backend.services.IBookingService;
 public class BookingController {
 	@Autowired
 	private IBookingService bookingService;
-	private BookingValidate validation = new BookingValidate();
 
 	// Exception to return error json
 	@ExceptionHandler(ValidationException.class)
@@ -61,14 +59,12 @@ public class BookingController {
 
 	@PostMapping
 	public ResponseEntity<Booking> addBooking(@RequestBody Booking booking) {
-		validation.validate(booking);
 		Booking createdBooking = bookingService.addBooking(booking);
 		return new ResponseEntity<>(createdBooking, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Booking> updateBooking(@RequestBody Booking booking, @PathVariable Integer id) {
-		validation.validate(booking);
 		Booking updatedBooking = bookingService.updateBooking(id, booking);
 		if (updatedBooking == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

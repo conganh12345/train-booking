@@ -6,12 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <title>SignIn Cover | CORK - Multipurpose Bootstrap Dashboard Template </title>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
-    <link href="/css/assets/light/authentication/auth-cover.css" rel="stylesheet" type="text/css" />
-    <link href="/css/assets/dark/authentication/auth-cover.css" rel="stylesheet" type="text/css" />    
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
     <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    
+    <link href="/css/assets/light/authentication/auth-cover.css" rel="stylesheet" type="text/css" />
+    <link href="/css/assets/dark/authentication/auth-cover.css" rel="stylesheet" type="text/css" />  
+          
     <link href="/css/assets/dark/main.css" rel="stylesheet" type="text/css" />
     <link href="/css/assets/light/main.css" rel="stylesheet" type="text/css" />
+    
+    <link href="/css/layouts/modern-light-menu/light/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="/css/layouts/modern-light-menu/dark/plugins.css" rel="stylesheet" type="text/css" />
+    
     <!-- END GLOBAL MANDATORY STYLES -->
     
     <style>
@@ -27,19 +35,10 @@
             display: none; 
             z-index: 1000; 
         }
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7); 
-            z-index: 999;
-            display: none; 
-        }
+        
     </style>
 </head>
-<body>
+<body class="form">
 
     <!-- BEGIN LOADER -->
     <div id="load_screen"> <div class="loader"> <div class="loader-content">
@@ -53,15 +52,15 @@
     
             <div class="row">
     
-                <div class="col-6 d-lg-flex d-none h-100 my-auto top-0 start-0 text-center justify-content-center flex-column" style="padding-top: 110px">
+                <div class="col-6 d-lg-flex d-none h-100 my-auto top-0 start-0 text-center justify-content-center flex-column">
                     <div class="auth-cover-bg-image"></div>
-                    <div class="auth-overlay" style="position: fixed;left: 0;top: 0;height: 100%;border-radius: inherit;background-image: linear-gradient(-225deg, #231557 0%, #44107A 29%, rgba(255, 19, 97, 0.75) 100%);width: 55%;"></div>
+                    <div class="auth-overlay"></div>
                         
                     <div class="auth-cover">
     
                         <div class="position-relative">
     
-                            <img style="width:100%" src="https://images.pexels.com/photos/2790396/pexels-photo-2790396.jpeg?auto=compress&cs=tinysrgb&w=400" alt="auth-img">
+                            <img src="/images/auth-cover.svg" alt="auth-img">
     
                             <h2 class="mt-5 text-white font-weight-bolder px-2">Join the community of expert developers</h2>
                             <p class="text-white px-2">It is easy to setup with great customer experience. Start your 7-day free trial</p>
@@ -71,8 +70,8 @@
 
                 </div>
 
-                <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-8 col-12 d-flex flex-column align-self-center ms-lg-auto me-lg-0 mx-auto" style="margin-top: 30px">
-                    <div class="card" style="border: none">
+                <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-8 col-12 d-flex flex-column align-self-center ms-lg-auto me-lg-0 mx-auto">
+                    <div class="card">
                         <div class="card-body">
     
                             <div class="row">
@@ -112,15 +111,7 @@
 	                                    </div>
 	                                </div>
                                 </form>
-                                
-                                <!-- <div class="col-12 mb-4">
-                                    <div class="">
-                                        <div class="seperator">
-                                            <hr>
-                                            <div class="seperator-text"> <span>Or continue with</span></div>
-                                        </div>
-                                    </div>
-                                </div> -->
+                            
 
                                 <div class="col-12">
                                     <div class="text-center">
@@ -140,8 +131,6 @@
 
     </div>
 	
-	 <div class="overlay"></div> 
-	<div class="notification" id="successNotification"></div> 
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    	<script src="/js/bootstrap/bootstrap.bundle.min.js"></script>
