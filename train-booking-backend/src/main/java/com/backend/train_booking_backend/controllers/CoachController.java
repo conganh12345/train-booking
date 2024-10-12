@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.backend.train_booking_backend.exception.CoachValidate;
 import com.backend.train_booking_backend.models.Coach;
 import com.backend.train_booking_backend.models.User;
 import com.backend.train_booking_backend.services.ICoachService;
@@ -31,7 +30,6 @@ import com.backend.train_booking_backend.services.ICoachService;
 public class CoachController {
 	@Autowired
 	private ICoachService coachService;
-	private CoachValidate validation = new CoachValidate();
 
 	// Exception to return error json
 	@ExceptionHandler(ValidationException.class)
@@ -61,14 +59,12 @@ public class CoachController {
 
 	@PostMapping
 	public ResponseEntity<Coach> addCoach(@RequestBody Coach coach) {
-		validation.validate(coach);
 		Coach createdCoach = coachService.addCoach(coach);
 		return new ResponseEntity<>(createdCoach, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Coach> updateCoach(@RequestBody Coach coach, @PathVariable Integer id) {
-		validation.validate(coach);
 		Coach updatedCoach = coachService.updateCoach(id, coach);
 		if (updatedCoach == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

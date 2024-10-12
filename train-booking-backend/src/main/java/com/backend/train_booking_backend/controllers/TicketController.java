@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.backend.train_booking_backend.exception.TicketValidate;
 import com.backend.train_booking_backend.models.Ticket;
 import com.backend.train_booking_backend.services.ITicketService;
 
@@ -31,7 +30,6 @@ import com.backend.train_booking_backend.services.ITicketService;
 public class TicketController {
 	@Autowired
 	private ITicketService ticketService;
-	private TicketValidate validation = new TicketValidate();
 
 	// Exception to return error json
 	@ExceptionHandler(ValidationException.class)
@@ -62,14 +60,12 @@ public class TicketController {
 
 	@PostMapping
 	public ResponseEntity<Ticket> addTicket(@RequestBody Ticket ticket) {
-		validation.validate(ticket);
 		Ticket createdSeatType = ticketService.addTicket(ticket);
 		return new ResponseEntity<>(createdSeatType, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Ticket> updateTicket(@RequestBody Ticket ticket, @PathVariable Integer id) {
-		validation.validate(ticket);
 		Ticket updatedTicket = ticketService.updateTicket(id, ticket);
 		if (updatedTicket == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

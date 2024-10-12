@@ -2,14 +2,31 @@ package com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.m
 
 import java.time.LocalDateTime;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+
 public class Booking {
 	private Integer id;
-	private String fullName;
-	private int paymentMethod;
-	private int status;
-	private String depatureStation;
-	private String destinationStation;
-	private LocalDateTime bookingTime;
+	
+	@NotEmpty(message = "Họ và tên không được để trống")
+    @Size(min = 3, max = 100, message = "Họ và tên phải có độ dài từ 3 đến 100 ký tự")
+    private String fullName;
+
+	@NotEmpty(message = "Phương thức thanh toán không được để trống")
+    private int paymentMethod;
+
+	@NotEmpty(message = "Trạng thái không được để trống")
+    private int status;
+
+    @NotEmpty(message = "Ga khởi hành không được để trống")
+    private String depatureStation;
+
+    @NotEmpty(message = "Ga đến không được để trống")
+    private String destinationStation;
+
+    @NotEmpty(message = "Thời gian đặt vé không được để trống")
+    private LocalDateTime bookingTime;
+    
 	public Integer getId() {
 		return id;
 	}

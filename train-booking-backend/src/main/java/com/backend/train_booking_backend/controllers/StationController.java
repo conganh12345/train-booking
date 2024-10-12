@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.backend.train_booking_backend.exception.StationValidate;
 import com.backend.train_booking_backend.models.Station;
 import com.backend.train_booking_backend.services.IStationService;
 
@@ -31,7 +30,6 @@ import com.backend.train_booking_backend.services.IStationService;
 public class StationController {
 	@Autowired
 	private IStationService stationService;
-	private StationValidate validation = new StationValidate();
 
 	// Exception to return error json
 	@ExceptionHandler(ValidationException.class)
@@ -62,7 +60,6 @@ public class StationController {
 
 	@PostMapping
 	public ResponseEntity<Station> addStation(@RequestBody Station station) {
-		validation.validate(station);
 		Station createdStation = stationService.addStation(station);
 
 		return new ResponseEntity<>(createdStation, HttpStatus.CREATED);
@@ -70,7 +67,6 @@ public class StationController {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Station> updateStation(@RequestBody Station station, @PathVariable Integer id) {
-		validation.validate(station);
 		Station updatedStation = stationService.updateStation(id, station);
 		if (updatedStation == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

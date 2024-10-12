@@ -2,16 +2,28 @@ package com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.m
 
 import java.time.LocalDateTime;
 
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+
 public class Schedule {
 	private Integer id;
 
-	private LocalDateTime departureDate;
+	@NotEmpty(message = "Ngày khởi hành không được để trống")
+    @Future(message = "Ngày khởi hành phải là một ngày trong tương lai")
+    private LocalDateTime departureDate;
 
-	private String destinationStation;
+    @NotEmpty(message = "Ga đến không được để trống")
+    @Size(min = 3, max = 100, message = "Ga đến phải có độ dài từ 3 đến 100 ký tự")
+    private String destinationStation;
 
-	private String scheduleName;
+    @NotEmpty(message = "Tên lịch trình không được để trống")
+    @Size(min = 3, max = 100, message = "Tên lịch trình phải có độ dài từ 3 đến 100 ký tự")
+    private String scheduleName;
 
-	private LocalDateTime estimateArrivalDate;
+    @NotEmpty(message = "Ngày đến dự kiến không được để trống")
+    @Future(message = "Ngày đến dự kiến phải là một ngày trong tương lai")
+    private LocalDateTime estimateArrivalDate;
 
 	public Integer getId() {
 		return id;

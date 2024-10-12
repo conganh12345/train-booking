@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.models.Train;
+import com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.models.User;
 import com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.services.TrainService;
+
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/train")
@@ -34,14 +37,19 @@ public class TrainController {
 
 	@GetMapping("/create")
 	public String create(Model model) {
-		model.addAttribute("page", "train");
+		model.addAttribute("page", "train").addAttribute("train", new Train());
 
 		return "train/create";
 	}
 
 	@PostMapping("/create")
-	public String create(@ModelAttribute() Train train, BindingResult result, Model model,
+	public String create(@Valid @ModelAttribute("train") Train train, BindingResult result, Model model,
 			RedirectAttributes redirectAttributes) {
+		if (result.hasErrors()) {
+			model.addAttribute("page", "train");
+			
+	        return "train/create"; 
+	    }
 		if (trainService.addTrain(train)) {
 			redirectAttributes.addFlashAttribute("success", "Thêm mới tàu thành công!");
 		} else {
@@ -60,8 +68,13 @@ public class TrainController {
 	}
 
 	@PostMapping("/update/{id}")
-	public String update(@PathVariable Integer id, @ModelAttribute Train train, BindingResult result,
-			RedirectAttributes redirectAttributes) {
+	public String update(@PathVariable Integer id, @Valid @ModelAttribute("train") Train train, BindingResult result,
+			RedirectAttributes redirectAttributes, Model model) {
+		if (result.hasErrors()) {
+			model.addAttribute("page", "train");
+			
+	        return "train/edit"; 
+	    }
 		train.setId(id);
 		if (trainService.updatetrain(train)) {
 			redirectAttributes.addFlashAttribute("success", "Cập nhật tàu thành công!");
