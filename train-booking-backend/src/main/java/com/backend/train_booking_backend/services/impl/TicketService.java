@@ -56,19 +56,17 @@ public class TicketService implements ITicketService {
 
 	@Override
 	@Transactional
-	public Optional<Ticket> deleteTicket(Integer id) {
+	public boolean deleteTicket(Integer id) {
 	    try {
-	        Optional<Ticket> ticketOpt = ticketRepo.findById(id);
-	        if (ticketOpt.isPresent()) {
-	        	Ticket ticketname = ticketOpt.get();
+	        if (ticketRepo.existsById(id)) {
 	        	ticketRepo.deleteById(id);
-	            return Optional.of(ticketname); 
+	            return true; 
 	        } else {
 	            System.out.println("Ticket with ID " + id + " not found.");
-	            return Optional.empty();
+	            return false;
 	        }
 	    } catch (Exception e) {
-	        throw new RuntimeException("Đã xảy ra lỗi khi xóa vé.", e);
+	        throw new RuntimeException("Đã xảy ra lỗi khi xóa tàu.", e);
 	    }
 	}
 }

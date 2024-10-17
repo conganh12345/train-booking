@@ -60,7 +60,6 @@
 									<th style="width: 5%">STT</th>
 									<th>Tên nhà ga</th>
 									<th>Địa chỉ</th>
-									<th>Mô tả</th>
 									<th class="no-content" style="width: 5%">Thao tác</th>
 								</tr>
 							</thead>
@@ -69,8 +68,6 @@
 									<td th:text="${stat.count}"></td>
 									<td th:text="${station.stationname}"></td>
 									<td th:text="${station.address}"></td>
-									<td th:text="${station.description}" class="text-truncate"
-										style="max-width: 250px;"></td>
 									<td><a th:href="@{/station/edit/{id}(id=${station.id})}"
 										class="bs-tooltip edit" data-bs-toggle="tooltip"
 										data-bs-placement="top"> <svg

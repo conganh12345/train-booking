@@ -16,5 +16,5 @@ public interface ITicketService {
 
 	Ticket getTicketByTicketName(String ticketname);
 
-	Optional<Ticket> deleteTicket(Integer ids);
+	boolean deleteTicket(Integer ids);
 }

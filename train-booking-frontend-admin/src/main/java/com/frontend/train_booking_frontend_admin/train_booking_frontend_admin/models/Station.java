@@ -15,6 +15,7 @@ public class Station {
     @Size(max = 150, message = "Địa chỉ không được dài quá 150 ký tự")
     private String address;
 
+    @NotEmpty(message = "Mô tả không được để trống")
     @Size(max = 200, message = "Mô tả không được dài quá 200 ký tự")
     private String description;
 

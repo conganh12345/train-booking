@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.models.Station;
+import com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.models.Train;
 import com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.services.StationService;
+
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/station")
@@ -34,14 +37,19 @@ public class StationController {
 
 	@GetMapping("/create")
 	public String create(Model model) {
-		model.addAttribute("page", "station");
+		model.addAttribute("page", "station").addAttribute("station", new Station());
 
 		return "station/create";
 	}
 
 	@PostMapping("/create")
-	public String create(@ModelAttribute() Station station, BindingResult result, Model model,
+	public String create(@Valid @ModelAttribute("station") Station station, BindingResult result, Model model,
 			RedirectAttributes redirectAttributes) {
+		if (result.hasErrors()) {
+			model.addAttribute("page", "station");
+			
+	        return "station/create"; 
+	    }
 		if (stationService.addStation(station)) {
 			redirectAttributes.addFlashAttribute("success", "Thêm mới nhà ga thành công!");
 		} else {
@@ -60,9 +68,14 @@ public class StationController {
 	}
 
 	@PostMapping("/update/{id}")
-	public String update(@PathVariable Integer id, @ModelAttribute Station station, BindingResult result,
-			RedirectAttributes redirectAttributes) {
+	public String update(@PathVariable Integer id,@Valid @ModelAttribute("station") Station station, BindingResult result,
+			RedirectAttributes redirectAttributes, Model model) {
 		station.setId(id);
+		if (result.hasErrors()) {
+			model.addAttribute("page", "station");
+			
+	        return "station/edit"; 
+	    }
 		if (stationService.updateStation(station)) {
 			redirectAttributes.addFlashAttribute("success", "Cập nhật nhà ga thành công!");
 		} else {

@@ -84,9 +84,8 @@ public class TicketController {
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Ticket> deleteTicket(@PathVariable Integer id) {
-		Optional<Ticket> deletedTicket = ticketService.deleteTicket(id);
-		if (deletedTicket.isPresent()) {
-			return new ResponseEntity<>(deletedTicket.get(), HttpStatus.OK);
+		if (ticketService.deleteTicket(id)) {
+			return new ResponseEntity<>(HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}

@@ -4,6 +4,16 @@
 	layout:decorate="~{layouts/base-layout.html}">
 <head>
 <title>Thêm mới</title>
+
+<div layout:fragment="headerFiles">
+	<link rel="stylesheet" type="text/css" href="/css/plugins/light/editors/quill/quill.snow.css">
+	<link rel="stylesheet" type="text/css" href="/css/plugins/dark/editors/quill/quill.snow.css">
+	<style>
+	 .ql-editor {
+         height: 300px;
+     }
+	</style>
+</div>
 </head>
 <body>
 	<div layout:fragment="content">
@@ -39,50 +49,36 @@
 					<div class="widget-content widget-content-area">
 						<div class="col-12">
 							<form th:action="@{/train/create}" th:object="${train}" id="general-settings" method="POST">
-							    <div class="row">
-							        <div class="col-md-6">
-							            <div class="form-group mb-4">
-							                <label for="trainname">Tên loại tàu <strong class="text-danger">*</strong></label>
-							                <input type="text" 
-							                    th:field="*{trainname}"
-							                    id="trainname"
-							                    class="form-control"
-							                    placeholder="Tên loại tàu"
-							                    th:classappend="${#fields.hasErrors('trainname') ? 'is-invalid' : ''}">
-							                <span th:if="${#fields.hasErrors('trainname')}" class="text-danger" th:errors="*{trainname}"></span>
-							            </div>
-							        </div>
-							    </div>
+							 
+						            <div class="form-group mb-4">
+						                <label for="trainname">Tên loại tàu <strong class="text-danger">*</strong></label>
+						                <input type="text" 
+						                    th:field="*{trainname}"
+						                    id="trainname"
+						                    class="form-control"
+						                    placeholder="Tên loại tàu"
+						                    th:classappend="${#fields.hasErrors('trainname') ? 'is-invalid' : ''}">
+						                <span th:if="${#fields.hasErrors('trainname')}" class="text-danger" th:errors="*{trainname}"></span>
+						            </div>
+						       
+						
+						            <div class="form-group mb-4">
+						                <label for="coachcount">Số lượng toa <strong class="text-danger">*</strong></label>
+						                <input type="number" 
+						                    th:field="*{coachcount}"
+						                    id="coachcount"
+						                    class="form-control"
+						                    placeholder="Số lượng toa"
+						                    th:classappend="${#fields.hasErrors('coachcount') ? 'is-invalid' : ''}">
+						                <span th:if="${#fields.hasErrors('coachcount')}" class="text-danger" th:errors="*{coachcount}"></span>
+						            </div>
 							
-							    <div class="row">
-							        <div class="col-md-6">
-							            <div class="form-group mb-4">
-							                <label for="coachcount">Số lượng toa <strong class="text-danger">*</strong></label>
-							                <input type="number" 
-							                    th:field="*{coachcount}"
-							                    id="coachcount"
-							                    class="form-control"
-							                    placeholder="Số lượng toa"
-							                    th:classappend="${#fields.hasErrors('coachcount') ? 'is-invalid' : ''}">
-							                <span th:if="${#fields.hasErrors('coachcount')}" class="text-danger" th:errors="*{coachcount}"></span>
-							            </div>
-							        </div>
-							    </div>
-							
-							    <div class="row">
-							        <div class="col-md-6">
-							            <div class="form-group mb-4">
-							                <label for="description">Mô tả <strong class="text-danger">*</strong></label>
-							                <textarea 
-							                    th:field="*{description}"
-							                    id="description"
-							                    class="form-control"
-							                    placeholder="Mô tả"
-							                    th:classappend="${#fields.hasErrors('description') ? 'is-invalid' : ''}"></textarea>
-							                <span th:if="${#fields.hasErrors('description')}" class="text-danger" th:errors="*{description}"></span>
-							            </div>
-							        </div>
-							    </div>
+							    	<div class="form-group mb-4">
+									    <label for="description">Mô tả <strong class="text-danger">*</strong></label>
+									    <div id="description" nam class="form-control" placeholder="Mô tả"></div>
+									    <span th:if="${#fields.hasErrors('description')}" class="text-danger" th:errors="*{description}"></span>
+									    <input type="hidden" th:field="*{description}" id="hidden-description">
+									</div>
 							
 							    <button type="submit" class="btn btn-primary">Hoàn tất</button>
 							</form>
@@ -95,7 +91,51 @@
 	</div>
 
 	<!--  BEGIN CUSTOM SCRIPTS FILE  -->
-	<div layout:fragment="footerFiles"></div>
+	 <div layout:fragment="footerFiles">
+		<script src="/plugins/editors/quill/quill.js"></script>
+    	<script src="/plugins/editors/quill/custom-quill.js"></script>
+    	<script type="text/javascript">
+	    	var quill = new Quill('#description', {
+    		  modules: {
+    			  toolbar: [
+                      [{
+                          'header': [1, 2, 3, 4, 5, 6, false]
+                      }],
+                      [{
+                          'font': []
+                      }, {
+                          'align': []
+                      }],
+                      [{
+                          'list': 'ordered'
+                      }, {
+                          'list': 'bullet'
+                      }],
+                      [{
+                          'indent': '-1'
+                      }, {
+                          'indent': '+1'
+                      }],
+                      ['bold', 'italic', 'underline', {
+                          'size': []
+                      }],
+                      [{
+                          'color': []
+                      }, {
+                          'background': []
+                      }],
+                      ['link', 'image'],
+                  ]
+    		  },
+    		  placeholder: 'Mô tả',
+    		  theme: 'snow' 
+    		});
+	    	
+	    	 $('#general-settings').on('submit', function() {
+	             $('#hidden-description').val(quill.root.innerHTML);
+	         });
+    	</script>
+	</div>
 	<!--  END CUSTOM SCRIPTS FILE  -->
 </body>
 

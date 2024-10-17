@@ -14,8 +14,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.models.Station;
 import com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.models.Ticket;
+import com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.models.enums.TicketStatus;
 import com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.services.TicketService;
+
+import jakarta.validation.Valid;
 
 
 @Controller
@@ -35,14 +40,21 @@ public class TicketController {
 
 	@GetMapping("/create")
 	public String create(Model model) {
-		model.addAttribute("page", "ticket");
+		model.addAttribute("page", "ticket")
+			.addAttribute("ticket", new Ticket())
+			.addAttribute("ticketStatuses", TicketStatus.values());
 
 		return "ticket/create";
 	}
 
 	@PostMapping("/create")
-	public String create(@ModelAttribute() Ticket ticket, BindingResult result, Model model,
+	public String create(@Valid @ModelAttribute("ticket") Ticket ticket, BindingResult result, Model model,
 			RedirectAttributes redirectAttributes) {
+		if (result.hasErrors()) {
+			model.addAttribute("page", "ticket");
+			
+	        return "ticket/create"; 
+	    }
 		if (ticketService.addTicket(ticket)) {
 			redirectAttributes.addFlashAttribute("success", "Thêm mới vé thành công!");
 		} else {
@@ -55,15 +67,22 @@ public class TicketController {
 	public String edit(@PathVariable Integer id, Model model, RedirectAttributes redirectAttributes) {
 		Ticket ticket = ticketService.getTicketById(id);
 
-		model.addAttribute("page", "ticket").addAttribute("ticket", ticket);
+		model.addAttribute("page", "ticket")
+			.addAttribute("ticket", ticket)
+			.addAttribute("ticketStatuses", TicketStatus.values());
 
 		return "ticket/edit";
 	}
 
 	@PostMapping("/update/{id}")
-	public String update(@PathVariable Integer id, @ModelAttribute Ticket ticket, BindingResult result,
-			RedirectAttributes redirectAttributes) {
+	public String update(@PathVariable Integer id,@Valid @ModelAttribute("ticket") Ticket ticket, BindingResult result,
+			RedirectAttributes redirectAttributes, Model model) {
 		ticket.setId(id);
+		if (result.hasErrors()) {
+			model.addAttribute("page", "ticket");
+			
+	        return "ticket/edit"; 
+	    }
 		if (ticketService.updateTicket(ticket)) {
 			redirectAttributes.addFlashAttribute("success", "Cập nhật vé thành công!");
 		} else {

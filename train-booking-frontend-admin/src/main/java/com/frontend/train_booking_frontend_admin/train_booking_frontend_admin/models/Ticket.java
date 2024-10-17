@@ -1,7 +1,10 @@
 package com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.models;
 
+import com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.models.enums.TicketStatus;
+
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class Ticket {
@@ -11,12 +14,12 @@ public class Ticket {
     @Size(min = 3, max = 50, message = "Tên vé phải có độ dài từ 3 đến 50 ký tự")
     private String ticketname;
 
-	@NotEmpty(message = "Giá vé không được để trống")
+	@NotNull(message = "Giá vé không được để trống")
     @Min(value = 0, message = "Giá vé phải lớn hơn hoặc bằng 0")
     private double price;
 
-	@NotEmpty(message = "Trạng thái không được để trống")
-    private int status;
+	@NotNull(message = "Trạng thái không được để trống")
+    private TicketStatus status;
 
 	public Integer getId() {
 		return id;
@@ -42,12 +45,11 @@ public class Ticket {
 		this.price = price;
 	}
 
-	public int getStatus() {
+	public TicketStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(TicketStatus status) {
 		this.status = status;
 	}
-
 }

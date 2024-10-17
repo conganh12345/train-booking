@@ -2,8 +2,12 @@ package com.backend.train_booking_backend.models;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.backend.train_booking_backend.models.enums.TicketStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,8 +27,8 @@ public class Ticket {
 	@Column
 	private double price;
 
-	@Column
-	private int status;
+	@Enumerated(EnumType.STRING)
+	private TicketStatus status;
 
 	@OneToMany(mappedBy = "ticket")
 	private List<TicketBookingDetail> details = new ArrayList<>();
@@ -61,12 +65,11 @@ public class Ticket {
 		this.price = price;
 	}
 
-	public int getStatus() {
+	public TicketStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(TicketStatus status) {
 		this.status = status;
 	}
-
 }

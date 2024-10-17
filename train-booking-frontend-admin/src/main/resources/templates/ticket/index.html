@@ -67,7 +67,7 @@
 									<td th:text="${stat.count}"></td>
 									<td th:text="${ticket.ticketname}"></td>
 									<td th:text="${ticket.price}"></td>
-									<td th:text="${ticket.status}" class="text-truncate"
+									<td th:text="${ticket.status.displayName}" class="text-truncate"
 										style="max-width: 250px;"></td>
 									<td><a th:href="@{/ticket/edit/{id}(id=${ticket.id})}"
 										class="bs-tooltip edit" data-bs-toggle="tooltip"
