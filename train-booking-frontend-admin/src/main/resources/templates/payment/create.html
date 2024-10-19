@@ -52,18 +52,18 @@
 											>
 										</div>
 									</div>
-									<div class="col-md-6">
-								        <div class="form-group mb-4">
-										    <label for="payment">Trạng thái<strong class="text-danger">*</strong></label> 
-										    <input type="text" 
-											    name="status"
-											    id="status"
-												class="form-control" 
-												placeholder="Email"
-												th:value="${payment.status}"
-											>
-										</div>
-									</div>
+							        <div class="col-md-6">
+							            <div class="form-group mb-4">
+							                <label for="status">Trạng thái <strong class="text-danger">*</strong></label>
+							                <select th:field="*{status}" id="status" class="form-control">
+							                    <option value="" >Chọn trạng thái</option>
+							                    <option th:each="status : ${paymentStatus}"
+							                            th:value="${status}"
+							                            th:text="${status.displayName}"></option>
+							                </select>
+							                <span th:if="${#fields.hasErrors('status')}" class="text-danger" th:errors="*{status}"></span>
+							            </div>
+							        </div>
 								</div>
 								
 								<div class="row">

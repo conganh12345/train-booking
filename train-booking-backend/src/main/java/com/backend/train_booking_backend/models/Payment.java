@@ -3,9 +3,14 @@ package com.backend.train_booking_backend.models;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.backend.train_booking_backend.models.enums.PaymentStatus;
+import com.backend.train_booking_backend.models.enums.TicketStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -22,8 +27,8 @@ public class Payment {
 	@Column
 	private double amount;
 
-	@Column
-	private int status;
+	@Enumerated(EnumType.STRING)
+	private PaymentStatus status;
 
 	@Column
 	private String paymentMethod;
@@ -67,11 +72,11 @@ public class Payment {
 		this.paymentTime = paymentTime;
 	}
 
-	public int getStatus() {
+	public PaymentStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(PaymentStatus status) {
 		this.status = status;
 	}
 

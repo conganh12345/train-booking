@@ -71,12 +71,12 @@
 								<tr th:each="booking, stat : ${bookings}">
 									<td th:text="${stat.count}"></td>
 									<td th:text="${booking.fullName}"></td>
-									<td th:text="${booking.status}"></td>
 									<td th:text="${booking.paymentMethod}"></td>
 									<td th:text="${booking.depatureStation}"></td>
 									<td th:text="${booking.destinationStation}"></td>
 									<td th:text="${booking.bookingTime}" class="text-truncate"
 										style="max-width: 250px;"></td>
+									<td th:text="${booking.status}"></td>
 									<td><a th:href="@{/booking/edit/{id}(id=${booking.id})}"
 										class="bs-tooltip edit" data-bs-toggle="tooltip"
 										data-bs-placement="top"> <svg

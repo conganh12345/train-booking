@@ -2,6 +2,8 @@ package com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.m
 
 import java.time.LocalDateTime;
 
+import com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.models.enums.PaymentStatus;
+
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 
@@ -13,7 +15,7 @@ public class Payment {
     private double amount;
 
 	@NotEmpty(message = "Trạng thái không được để trống")
-    private int status;
+    private PaymentStatus status;
 
     @NotEmpty(message = "Phương thức thanh toán không được để trống")
     private String paymentMethod;
@@ -37,11 +39,11 @@ public class Payment {
 		this.amount = amount;
 	}
 
-	public int getStatus() {
+	public PaymentStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(PaymentStatus status) {
 		this.status = status;
 	}
 
@@ -60,5 +62,4 @@ public class Payment {
 	public void setPaymentTime(LocalDateTime paymentTime) {
 		this.paymentTime = paymentTime;
 	}
-
 }

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.models.Payment;
+import com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.models.enums.PaymentStatus;
+import com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.models.enums.TicketStatus;
 import com.frontend.train_booking_frontend_admin.train_booking_frontend_admin.services.PaymentService;
 
 
@@ -35,7 +37,9 @@ public class PaymentController {
 
 	@GetMapping("/create")
 	public String createPayment(Model model) {
-		model.addAttribute("page", "payment").addAttribute("payment", new Payment()); 
+		model.addAttribute("page", "payment")
+			.addAttribute("payment", new Payment())
+			.addAttribute("paymentStatus", PaymentStatus.values());
 		
 		return "payment/create"; 
 	}
@@ -55,7 +59,9 @@ public class PaymentController {
 	public String edit(@PathVariable Integer id, Model model, RedirectAttributes redirectAttributes) {
 		Payment payment = paymentService.getPaymentById(id);
 
-		model.addAttribute("page", "payment").addAttribute("payment", payment);
+		model.addAttribute("page", "payment")
+			.addAttribute("payment", payment)
+			.addAttribute("paymentStatus", PaymentStatus.values());
 
 		return "payment/edit";
 	}
